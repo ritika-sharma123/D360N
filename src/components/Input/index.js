@@ -21,21 +21,34 @@ input{
 }
 
 img{
-    position: relative;
-    right: -92%;
-    top: -39px;
-    margin:0px;
-    padding:0px
+    width:20px;
+    height:20px
 }
+
 `;
 
-const Input =({type='text' , labelText,  customClass}) =>{
+const InputImgDiv = styled.div`
+  background-color:white;
+  display:flex;
+  align-items:center;
+
+  input{
+    flex:1;
+    outline:none
+  }
+
+`;
+
+const Input =({type='text' , labelText,  customClass, suffix}) =>{
 
     return(
         <LabelInputDiv>
           <Label labelText={labelText}/>
+          <InputImgDiv>
           <DefaultInput className={`input ${customClass}`} type={type}>
           </DefaultInput>
+          {suffix }
+          </InputImgDiv>
         </LabelInputDiv>
     )
 }

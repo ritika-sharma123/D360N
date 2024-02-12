@@ -46,12 +46,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
         }
   `;
 
-
-   const LabelInputImgDiv = styled.div`
-       display:flex;
-       flex-flow:column;
-   `
-
    const ForgotPasswordText = styled.div`
         text-align:center;
 
@@ -61,8 +55,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
             cursor:pointer
         }
    `;
-
-   
 
 
 const LoginPage = ( ) =>{
@@ -114,13 +106,10 @@ const LoginPage = ( ) =>{
                 </RadioGroup>
                 </div>
              </div>
-              <Input labelText='UserName'/>
-             <LabelInputImgDiv>
-             <Input type='password' labelText='Password'/>
-             {
-                isPasswordVisible ? <span><img src={VisibilityIcon} alt='v' onClick={showPassword}/></span> :  <span><img src={EyeInvisible} alt='' onClick={showPassword}/></span>
-             }
-             </LabelInputImgDiv>
+             <Input labelText='UserName'/>
+             <Input type='password' labelText='Password' suffix={
+                    isPasswordVisible ? <span><img src={VisibilityIcon} alt='v' onClick={showPassword}/></span> :  <span><img src={EyeInvisible} alt='' onClick={showPassword}/></span>
+             } />
              <Button name='Continue' backgroundcolor='#FF7A45' color='#ffffff'/>
              <ForgotPasswordText>
                 <span>Forgot Password</span>
