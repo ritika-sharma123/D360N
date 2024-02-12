@@ -10,17 +10,17 @@ width:100px;
 height:40px;
 border:1px solid transparent;
 border-radius:2px;
-background-color:${(props) => props.backgroundColor? '#FF7A45' : ''};
+background-color:${(props) => props.backgroundcolor? '#FF7A45' : ''};
 color:${(props) => props.color? 'white' :''};
 font-size:16px;
 cursor:pointer
 `
 
-const Button = ({name}) =>{
+const Button = ({name,backgroundcolor , color}) =>{
 
     return(
         <DefaultButtonDiv>
-         <DefaultButton color backgroundColor>{name}</DefaultButton>
+         <DefaultButton color={color} backgroundcolor={backgroundcolor}>{name}</DefaultButton>
         </DefaultButtonDiv>
     )
 }

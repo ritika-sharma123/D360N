@@ -5,11 +5,11 @@ import styled from 'styled-components';
      font-size:14px;
  `;
 
-const Label =({text='text' }) =>{
+const Label =({labelText='text' }) =>{
 
     return(
         <>
-          <DefaultLabel>{text}</DefaultLabel>
+          <DefaultLabel>{labelText}</DefaultLabel>
         </>
     )
 }
