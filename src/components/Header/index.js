@@ -10,7 +10,7 @@ height: calc(100vh-100px);
 
 img{
     width:480px;
-    height:80px;
+    height:90px;
 }
 `;
 

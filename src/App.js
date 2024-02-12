@@ -1,13 +1,22 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Button from './components/Button';
 import Header from './components/Header';
+import LoginPage from './pages/Login';
+import styled from 'styled-components';
+
+const Container = styled.div`
+     height:100vh;
+`;
 
 function App() {
   return (
-    <>
+    <Container>
      <Header />
-     <Button name='continue' backgroundColor='#FF7A45' color='#ffffff'/>
-    </>
+     <Routes>
+        <Route path="/" element={<Navigate replace to="/Login" />} />
+        <Route default path="/login" element={<LoginPage/>}/>
+      </Routes>
+    </Container>
   );
 }
 

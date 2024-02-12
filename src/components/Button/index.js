@@ -9,9 +9,11 @@ const DefaultButton = styled.button`
 width:100px;
 height:40px;
 border:1px solid transparent;
-border-radius:2;
+border-radius:2px;
 background-color:${(props) => props.backgroundColor? '#FF7A45' : ''};
-color:${(props) => props.color? 'white' :''}
+color:${(props) => props.color? 'white' :''};
+font-size:16px;
+cursor:pointer
 `
 
 const Button = ({name}) =>{
