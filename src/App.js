@@ -1,8 +1,11 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Header";
 import LoginPage from "./pages/Login";
 import styled from "styled-components";
+import ManageIntegrationsPage from "./pages/ManageIntegrations";
+import CommonHeader from "./components/HeaderPages";
+import PrivateRoute from "./pages/Routes";
+import Dashboard from "./pages/DashBoard";
 
 const Container = styled.div`
   height: 100vh;
@@ -11,11 +14,24 @@ const Container = styled.div`
 function App() {
   return (
     <Container>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/Login" />} />
-        <Route default path="/login" element={<LoginPage />} />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/login" />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/manage-integrations"
+            element={<ManageIntegrationsPage />}
+          />
+          <Route
+            path="/dashboard/*"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </Container>
   );
 }

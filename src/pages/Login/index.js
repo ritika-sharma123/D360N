@@ -1,12 +1,12 @@
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { useState } from "react";
-import Label from "../../components/Label";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import styled from "styled-components";
 import "./index.css";
 import EyeInvisible from "../../images/EyeInvisible.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import Header from "../../components/Header";
 
 const LoginCardDiv = styled.div`
   width: 100%;
@@ -57,88 +57,102 @@ const ForgotPasswordText = styled.div`
 
 const LoginPage = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const showPassword = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
-  return (
-    <LoginCardDiv>
-      <LoginCard>
-        <h3 className="login-card">Log In</h3>
-        <div>
-          <p>Please Select Your Role</p>
-          <div>
-            <RadioGroup
-              row
-              aria-labelledby="demo-form-control-label-placement"
-              name="position"
-              defaultValue="top"
-            >
-              <FormControlLabel
-                value="end"
-                control={
-                  <Radio
-                    sx={{
-                      color: "white",
-                      "&.Mui-checked": {
-                        color: "blue",
-                      },
-                      "& .MuiSvgIcon-root": {
-                        fontSize: 20,
-                      },
-                    }}
-                  />
-                }
-                label="Administrator"
-              />
 
-              <FormControlLabel
-                value="end1"
-                control={
-                  <Radio
-                    sx={{
-                      color: "white",
-                      "&.Mui-checked": {
-                        color: "blue",
-                      },
-                      "& .MuiSvgIcon-root": {
-                        fontSize: 20,
-                      },
-                    }}
-                  />
-                }
-                label="Employee"
-              />
-            </RadioGroup>
+  const handleLogin = () => {
+    // Perform authentication logic here
+    setIsLoggedIn(true);
+  };
+  return (
+    <>
+      <Header />
+      <LoginCardDiv>
+        <LoginCard>
+          <h3 className="login-card">Log In</h3>
+          <div>
+            <p>Please Select Your Role</p>
+            <div>
+              <RadioGroup
+                row
+                aria-labelledby="demo-form-control-label-placement"
+                name="position"
+                defaultValue="top"
+              >
+                <FormControlLabel
+                  value="end"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "white",
+                        "&.Mui-checked": {
+                          color: "blue",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 20,
+                        },
+                      }}
+                    />
+                  }
+                  label="Administrator"
+                />
+
+                <FormControlLabel
+                  value="end1"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "white",
+                        "&.Mui-checked": {
+                          color: "blue",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 20,
+                        },
+                      }}
+                    />
+                  }
+                  label="Employee"
+                />
+              </RadioGroup>
+            </div>
           </div>
-        </div>
-        <Input labelText="UserName" />
-        <Input
-          type="password"
-          labelText="Password"
-          suffix={
-            isPasswordVisible ? (
-              <span>
-                <img src={VisibilityIcon} alt="v" onClick={showPassword} />
-              </span>
-            ) : (
-              <span>
-                <img src={EyeInvisible} alt="" onClick={showPassword} />
-              </span>
-            )
-          }
-        />
-        <Button name="Continue" backgroundcolor="#FF7A45" color="#ffffff" />
-        <ForgotPasswordText>
-          <span>Forgot Password</span>
-        </ForgotPasswordText>
-        <ForgotPasswordText>
-          <p>
-            Do you have an account? <span>Sign Up Here.</span>
-          </p>
-        </ForgotPasswordText>
-      </LoginCard>
-    </LoginCardDiv>
+          <Input labelText="UserName" />
+          <Input
+            type="password"
+            labelText="Password"
+            suffix={
+              isPasswordVisible ? (
+                <span>
+                  <img src={VisibilityIcon} alt="v" onClick={showPassword} />
+                </span>
+              ) : (
+                <span>
+                  <img src={EyeInvisible} alt="" onClick={showPassword} />
+                </span>
+              )
+            }
+          />
+          <Button
+            name="Continue"
+            backgroundcolor="#FF7A45"
+            color="#ffffff"
+            onClick={handleLogin}
+          />
+          <ForgotPasswordText>
+            <span>Forgot Password</span>
+          </ForgotPasswordText>
+          <ForgotPasswordText>
+            <p>
+              Do you have an account? <span>Sign Up Here.</span>
+            </p>
+          </ForgotPasswordText>
+        </LoginCard>
+      </LoginCardDiv>
+    </>
   );
 };
 
