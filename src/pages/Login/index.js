@@ -56,6 +56,10 @@ const ForgotPasswordText = styled.div`
 `;
 
 const LoginPage = () => {
+  const [creds, setCreds] = useState({
+    userName: "",
+    passWord: "",
+  });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -63,10 +67,18 @@ const LoginPage = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  const handleInput = (e, key) => {
+    setCreds({
+      ...creds,
+      [key]: e.target.value,
+    });
+  };
+
   const handleLogin = () => {
     // Perform authentication logic here
     setIsLoggedIn(true);
   };
+
   return (
     <>
       <Header />
@@ -120,10 +132,16 @@ const LoginPage = () => {
               </RadioGroup>
             </div>
           </div>
-          <Input labelText="UserName" />
+          <Input
+            labelText="UserName"
+            value={creds.userName}
+            onChange={(e) => handleInput(e, "userName")}
+          />
           <Input
             type="password"
             labelText="Password"
+            value={creds.passWord}
+            onChange={(e) => handleInput(e, "passWord")}
             suffix={
               isPasswordVisible ? (
                 <span>
@@ -138,7 +156,7 @@ const LoginPage = () => {
           />
           <Button
             name="Continue"
-            backgroundcolor="#FF7A45"
+            backgroundColor="#FF7A45"
             color="#ffffff"
             onClick={handleLogin}
           />

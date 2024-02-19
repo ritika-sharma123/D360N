@@ -35,7 +35,7 @@ const InputImgDiv = styled.div`
   }
 `;
 
-const Input = ({ type = "text", labelText, customClass, suffix }) => {
+const Input = ({ type = "text", labelText, customClass, suffix, onChange }) => {
   return (
     <LabelInputDiv>
       <Label labelText={labelText} />
@@ -43,6 +43,7 @@ const Input = ({ type = "text", labelText, customClass, suffix }) => {
         <DefaultInput
           className={`input ${customClass}`}
           type={type}
+          onChange={onChange}
         ></DefaultInput>
         {suffix}
       </InputImgDiv>

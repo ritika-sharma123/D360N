@@ -37,6 +37,12 @@
   }
 } */
 
+:root {
+  --button-background-color: #ff7a45;
+  --font: "Roboto";
+}
+
+html,
 body {
-  font-family: "Roboto";
+  font-family: var(--font);
 }
