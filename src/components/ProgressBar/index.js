@@ -38,23 +38,23 @@ const ScalingDiv = styled.div`
   border-radius: 100px;
 `;
 
-const ProgressBar = ({ scale = "100" }) => {
+const ProgressBar = ({ scale = 100 }) => {
   useEffect(() => {
     progressScalingBackground(scale);
   }, [scale]);
 
   const progressScalingBackground = (value) => {
-    switch (value) {
-      case "30":
-        return "#1890FF";
-      case "60":
-        return "#FFFF00";
-      case "100":
-        return "#52C41A";
-      default:
-        break;
+    let backgroundColor = "";
+    if (value <= 30) {
+      backgroundColor = "#1890FF";
+    } else if (value > 30 && value <= 60) {
+      backgroundColor = "#FFFF00";
+    } else if (value > 60) {
+      backgroundColor = "#52C41A";
     }
+    return backgroundColor;
   };
+
   return (
     <DefaultProgressBarDiv>
       <DefaultProgressBar>
@@ -65,7 +65,7 @@ const ProgressBar = ({ scale = "100" }) => {
           ></ScalingDiv>
         </Progress>
         <div>
-          {scale !== "100" ? (
+          {scale !== 100 ? (
             `${scale}%`
           ) : (
             <i
