@@ -5,7 +5,6 @@ import ManageIntegrationsPage from "../ManageIntegrations";
 const Dashboard = () => {
   return (
     <>
-      DashBoard
       <Routes>
         <Route
           path="/manage-integrations"
