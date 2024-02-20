@@ -41,6 +41,7 @@ const Input = ({ type = "text", labelText, customClass, suffix }) => {
       <Label labelText={labelText} />
       <InputImgDiv>
         <DefaultInput
+          placeholder="Enter"
           className={`input ${customClass}`}
           type={type}
         ></DefaultInput>
