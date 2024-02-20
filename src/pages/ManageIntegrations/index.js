@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../components/DataTable";
 import { sampleRowData, sampleColumnData } from "../../mocks/SampleData";
+import ProgressBar from "../../components/ProgressBar";
 
 const ManageIntegrationsPage = () => {
   const createColumnsData = () => {
