@@ -38,7 +38,7 @@ const ScalingDiv = styled.div`
   border-radius: 100px;
 `;
 
-const ProgressBar = ({ scale = "0" }) => {
+const ProgressBar = ({ scale = "100" }) => {
   useEffect(() => {
     progressScalingBackground(scale);
   }, [scale]);
@@ -50,7 +50,7 @@ const ProgressBar = ({ scale = "0" }) => {
       case "60":
         return "#FFFF00";
       case "100":
-        return "#00FF00";
+        return "#52C41A";
       default:
         break;
     }
@@ -64,7 +64,16 @@ const ProgressBar = ({ scale = "0" }) => {
             width={`${scale}%`}
           ></ScalingDiv>
         </Progress>
-        <div>{scale}%</div>
+        <div>
+          {scale !== "100" ? (
+            `${scale}%`
+          ) : (
+            <i
+              style={{ color: "#52C41A", fontSize: 20, height: 14 }}
+              class="fa fa-check-circle"
+            ></i>
+          )}
+        </div>
       </DefaultProgressBar>
       <div>{scale}/100 Files Transferred</div>
     </DefaultProgressBarDiv>
