@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const DefaultProgressBarDiv = styled.div`
@@ -33,18 +33,36 @@ const Progress = styled.div`
 
 const ScalingDiv = styled.div`
   width: ${(props) => (props.width ? props.width : "")};
-  background-color: ${(props) =>
-    props.background ? props.background : "var(--blue)"};
+  background-color: ${(props) => (props.background ? props.background : "")};
   height: 10px;
   border-radius: 100px;
 `;
 
-const ProgressBar = ({ scale = "30" }) => {
+const ProgressBar = ({ scale = "0" }) => {
+  useEffect(() => {
+    progressScalingBackground(scale);
+  }, [scale]);
+
+  const progressScalingBackground = (value) => {
+    switch (value) {
+      case "30":
+        return "#1890FF";
+      case "60":
+        return "#FFFF00";
+      case "100":
+        return "#00FF00";
+      default:
+        break;
+    }
+  };
   return (
     <DefaultProgressBarDiv>
       <DefaultProgressBar>
         <Progress>
-          <ScalingDiv width={`${scale}%`}></ScalingDiv>
+          <ScalingDiv
+            background={progressScalingBackground(scale)}
+            width={`${scale}%`}
+          ></ScalingDiv>
         </Progress>
         <div>{scale}%</div>
       </DefaultProgressBar>
