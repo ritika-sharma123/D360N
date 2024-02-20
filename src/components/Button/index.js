@@ -12,7 +12,9 @@ const DefaultButton = styled.button`
   border: 1px solid transparent;
   border-radius: 2px;
   background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : ""};
+    props.backgroundColor
+      ? props.backgroundColor
+      : "var(--button-background-color)"};
   color: ${(props) => (props.color ? props.color : "")};
   font-size: 16px;
   cursor: pointer;
