@@ -10,9 +10,7 @@ import Dashboard from "./pages/DashBoard";
 import React, { useState } from "react";
 import Layout from "./components/Layout";
 
-const Container = styled.div`
-  height: 100vh;
-`;
+const Container = styled.div``;
 const App = () => {
   debugger;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
