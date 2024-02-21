@@ -1,25 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../../images/Logo.png";
+import './index.css';
 
-const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh-100px);
-
-  img {
-    width: 480px;
-    height: 90px;
-  }
-`;
-
-const Header = () => {
-  return (
-    <HeaderContainer>
-      <img src={Logo} alt="Logo"></img>
-    </HeaderContainer>
-  );
-};
-
+ const Header = () => {
+    return(
+        <div class="headercontainer">
+           <p id="headerText">
+           <span id="DLX">DLX</span><span id="press">press</span>  <span id="development">Development page</span>
+           </p>
+        </div>
+    );
+}
 export default Header;

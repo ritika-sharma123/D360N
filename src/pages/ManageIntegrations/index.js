@@ -23,6 +23,7 @@ const ManageIntegrationsPage = () => {
     <>
       <b>All Integrations</b>
       <DataTable columns={columnData} rows={sampleRowData} />
+      {/* <DataTable /> */}
     </>
   );
 };

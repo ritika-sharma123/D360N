@@ -3,37 +3,40 @@ import "./App.css";
 import LoginPage from "./pages/Login";
 import styled from "styled-components";
 import ManageIntegrationsPage from "./pages/ManageIntegrations";
-import CommonHeader from "./components/HeaderPages";
-import PrivateRoute from "./pages/Routes";
+
 import Dashboard from "./pages/DashBoard";
+import React, { useState } from "react";
+import Layout from "./components/Layout";
 
 const Container = styled.div`
   height: 100vh;
 `;
+const App = () => {
+  debugger;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const handelLogin = (username, passWord) => {
+    if (username === "admin" && passWord === "password") {
+      setIsLoggedIn(true);
+    }
+  };
 
-function App() {
   return (
-    <Container>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/login" />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/manage-integrations"
-            element={<ManageIntegrationsPage />}
-          />
-          <Route
-            path="/dashboard/*"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </Container>
+    <div>
+      {isLoggedIn ? (
+        <div>
+          <Layout />
+          <Container>
+            <Routes>
+              <Route path="/" element={<Navigate replace to="/dashboard" />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </Container>
+        </div>
+      ) : (
+        <LoginPage onLogin={handelLogin} />
+      )}
+    </div>
   );
-}
+};
 
 export default App;
