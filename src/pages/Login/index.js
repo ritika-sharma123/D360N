@@ -6,7 +6,7 @@ import styled from "styled-components";
 import "./index.css";
 import EyeInvisible from "../../images/EyeInvisible.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import Header from "../../components/Header";
+import Logo from "../../images/Logo.png";
 
 const LoginCardDiv = styled.div`
   width: 100%;
@@ -55,7 +55,19 @@ const ForgotPasswordText = styled.div`
   }
 `;
 
-const LoginPage = () => {
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh-100px);
+
+  img {
+    width: 480px;
+    height: 90px;
+  }
+`;
+
+const LoginPage = ({onLogin}) => {
   const [creds, setCreds] = useState({
     userName: "",
     passWord: "",
@@ -76,12 +88,18 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     // Perform authentication logic here
+    if(creds.userName==='admin'&& creds.passWord==='password')
+   {
     setIsLoggedIn(true);
+    onLogin(creds.userName,creds.passWord);
+   }
   };
 
   return (
-    <>
-      <Header />
+   <div>
+    <HeaderContainer>
+    <img src={Logo} alt="Logo"></img>
+    </HeaderContainer>
       <LoginCardDiv>
         <LoginCard>
           <h3 className="login-card">Log In</h3>
@@ -170,7 +188,8 @@ const LoginPage = () => {
           </ForgotPasswordText>
         </LoginCard>
       </LoginCardDiv>
-    </>
+
+   </div>
   );
 };
 

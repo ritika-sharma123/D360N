@@ -1,19 +1,12 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import ManageIntegrationsPage from "../ManageIntegrations";
 
-const Dashboard = () => {
-  return (
-    <>
-      DashBoard
-      <Routes>
-        <Route
-          path="/manage-integrations"
-          element={<ManageIntegrationsPage />}
-        />
-      </Routes>
-    </>
-  );
-};
-
+import React  from 'react';
+const Dashboard=()=>
+{
+    return(
+        <div className="home">
+       <h1>Dashboard</h1><br></br>
+       
+      </div>
+    );
+}
 export default Dashboard;

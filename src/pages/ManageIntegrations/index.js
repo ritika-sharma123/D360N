@@ -1,11 +1,11 @@
 import React from "react";
-import DataTable from "../../components/DataTable";
+//import DataTable from "../../components/DataTable";
 
 const ManageIntegrationsPage = () => {
   return (
     <>
       <b>All Integrations</b>
-      <DataTable />
+      {/* <DataTable /> */}
     </>
   );
 };
