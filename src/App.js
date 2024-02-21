@@ -12,7 +12,6 @@ import Layout from "./components/Layout";
 
 const Container = styled.div``;
 const App = () => {
-  debugger;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handelLogin = (username, passWord) => {
     if (username === "admin" && passWord === "password") {
@@ -29,6 +28,10 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Navigate replace to="/dashboard" />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/manage-integrations"
+                element={<ManageIntegrationsPage />}
+              />
             </Routes>
           </Container>
         </div>
