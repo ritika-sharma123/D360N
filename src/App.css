@@ -1,5 +1,42 @@
-/* .App {
+:root {
+  --button-background-color: #ff7a45;
+  --font: "Roboto";
+}
+
+html,
+body {
+  font-family: var(--font);
+}
+
+.App {
   text-align: center;
+}
+
+.home > h1 {
+  font-family: Roboto;
+  margin: 0px;
+  padding: 8px;
+  line-height: 50px;
+  color: #000000d9;
+}
+.home {
+  background-color: #ffffff; /* Used if the image is unavailable */
+  margin-left: 300px;
+  margin-top: 0px;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+*/ body {
+  font-family: "Roboto";
 }
 
 .App-logo {
@@ -32,11 +69,8 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
-} */
-
-body {
-  font-family: "Roboto";
 }

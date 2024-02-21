@@ -1,0 +1,52 @@
+#header {
+    position: absolute;
+    width: 250px;
+  }
+  #header .pro-sidebar {
+    height: 90vh;
+    display: block;
+  }
+  
+  
+  #header .pro-sidebar {
+    width: 100%;
+    min-width: 100%;
+  }
+  
+  #header .pro-sidebar.collapsed {
+    width: 80px;
+    min-width: 80px;
+  }
+  
+  #header .pro-sidebar-inner {
+    background-color: #FFFFFF;
+    box-shadow: 0.10px 0.1666px 3px 1px rgba(0, 0, 0, 0.15);
+  }
+ 
+    
+  #header
+    .pro-sidebar-inner
+    .pro-sidebar-layout
+    ul
+    .pro-inner-item
+    .pro-icon-wrapper {
+    background-color: #FFFFFF;
+    ;
+    color: #000000D9;
+    border-radius: 3px;
+  }
+
+ 
+
+  
+  .pro-sidebar .pro-menu a{
+    color: #000000D9;
+  }
+  
+  .pro-sidebar .pro-menu a:hover {
+    color: #8ecdeb;
+  }
+  
+  .pro-inner-item{
+    color: #8ecdeb;
+  }

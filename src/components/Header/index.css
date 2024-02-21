@@ -1,0 +1,20 @@
+.headercontainer{
+    display: flex;
+    height: 60px;
+    background-color:#082340;
+    color:#FFFFFF;    
+    text-align: center;
+}
+
+#headerText{
+    color: white;
+    margin-left: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 60;
+    font-size: 18px;
+}
+
+#DLX{
+    color: #F26A51;
+}
+

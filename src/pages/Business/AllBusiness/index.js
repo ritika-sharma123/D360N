@@ -12,7 +12,7 @@ const Business = () => {
   return (
     <BusinessPage>
       <BusinessHeading>
-        <Title>All Business Files</Title>
+        {/* <Title>All Business Files</Title> */}
       </BusinessHeading>
       Business Page
     </BusinessPage>
