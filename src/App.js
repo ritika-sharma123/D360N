@@ -11,38 +11,32 @@ import Layout from "./components/Layout";
 const Container = styled.div`
   height: 100vh;
 `;
-const App=()=> {
+const App = () => {
   debugger;
-  const [isLoggedIn, setIsLoggedIn]=useState(false);
-  const handelLogin=(username,passWord)=>
-  {
-    if(username==='admin'&& passWord==='password')
-    {
-     setIsLoggedIn(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const handelLogin = (username, passWord) => {
+    if (username === "admin" && passWord === "password") {
+      setIsLoggedIn(true);
     }
-  }
+  };
 
   return (
     <div>
-     
-      {isLoggedIn?(
+      {isLoggedIn ? (
         <div>
-         <Layout/>
-         <Container>
-       
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/dashboard" />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      
-         </Container>
-        </div>)
-
-    :(<LoginPage onLogin={handelLogin}/> )}
-
-
-     </div>
+          <Layout />
+          <Container>
+            <Routes>
+              <Route path="/" element={<Navigate replace to="/dashboard" />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </Container>
+        </div>
+      ) : (
+        <LoginPage onLogin={handelLogin} />
+      )}
+    </div>
   );
-}
+};
 
 export default App;
