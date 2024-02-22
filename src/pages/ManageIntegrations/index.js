@@ -17,7 +17,6 @@ const ActionLinks = styled.div`
 `;
 
 const ManageIntegrationsPage = () => {
-  const [manageRowId, setManageRowId] = useState(null);
   const navigate = useNavigate();
 
   const createColumnsData = () => {
@@ -26,13 +25,13 @@ const ManageIntegrationsPage = () => {
       if (item.headerName === "Actions") {
         columnData.push({
           ...item,
-          renderCell: () => (
-            <>
+          renderCell: (props) => {
+            return (
               <ActionLinks>
-                <div onClick={() => handleRoute()}>Manage</div>
+                <div onClick={() => handleRoute(props)}>Manage</div>
               </ActionLinks>
-            </>
-          ),
+            );
+          },
         });
       } else {
         columnData.push({
@@ -45,17 +44,15 @@ const ManageIntegrationsPage = () => {
 
   const [columnData, setColumnData] = useState(createColumnsData());
 
-  const handleRowClick = (row) => {
-    setManageRowId(row.id);
-  };
+  const handleRowClick = (row) => {};
 
   useEffect(() => {
     setColumnData(createColumnsData());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sampleColumnData]);
 
-  const handleRoute = () => {
-    navigate(`/all-manage-integrations/${manageRowId}`);
+  const handleRoute = (rowDetail) => {
+    navigate(`/all-manage-integrations/${rowDetail.id}`, { rowDetail });
   };
 
   return (
