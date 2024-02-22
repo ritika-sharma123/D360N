@@ -20,8 +20,7 @@ import {
   DatabaseOutlined,
   BranchesOutlined,
   FileOutlined,
-  LogoutOutlined
- 
+  LogoutOutlined,
 } from "@ant-design/icons";
 import { RiPencilLine } from "react-icons/ri";
 import { BiCog } from "react-icons/bi";
@@ -72,13 +71,15 @@ const SideBar = () => {
                 <Link to="/manageintegrations"> Manage Integrations</Link>
               </MenuItem>
               <MenuItem icon={<FileOutlined />}>
-                <Link to="/businessfiles">Business Files</Link>
+                <Link to="/business">Business Files</Link>
               </MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-              <MenuItem icon={<LogoutOutlined />}><Link>Logout</Link></MenuItem>
+              <MenuItem icon={<LogoutOutlined />}>
+                <Link>Logout</Link>
+              </MenuItem>
             </Menu>
           </SidebarFooter>
         </ProSidebar>

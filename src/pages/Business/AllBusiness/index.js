@@ -1,21 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-const BusinessPage = styled.div`
-  width: 100%;
-  display: flex;
-`;
-const BusinessHeading = styled.div`
-  width: 100%;
-  display: flex;
-`;
+import { useNavigate } from "react-router-dom";
+import Button from "../../../components/Button";
+const AllBusiness = styled.div``;
+const AllBusinessContainer = styled.div``;
+const TitleDiv = styled.div``;
 const Business = () => {
+  const navigate = useNavigate();
+  const handleClick = () => navigate("/createbusiness");
   return (
-    <BusinessPage>
-      <BusinessHeading>
-        {/* <Title>All Business Files</Title> */}
-      </BusinessHeading>
-      Business Page
-    </BusinessPage>
+    <AllBusinessContainer className="home">
+      <AllBusiness>
+        <TitleDiv>All Business Files</TitleDiv>
+        <button onClick={handleClick}>Create New</button>
+      </AllBusiness>
+    </AllBusinessContainer>
   );
 };
 

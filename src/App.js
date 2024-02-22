@@ -29,6 +29,8 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Navigate replace to="/dashboard" />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/business" element={<Business />} />
+              <Route path="/createbusiness" element={<CreateNewBusiness />} />
             </Routes>
           </Container>
         </div>

@@ -8,8 +8,9 @@ import PaperClip from "../../../images/PaperClip.png";
 import ArrowLeft from "../../../images/ArrowLeft.png";
 import TextAreaInput from "../../../components/TextArea";
 import SelectorInput from "../../../components/Selector";
+import BreadCrumbs from "../../../components/BreadCrumbs";
 const CreateBusiness = styled.div`
-  width: 100%;
+  width: calc(100% - 300px);
   display: flex;
   padding: 20px;
   flex-direction: column;
@@ -48,6 +49,10 @@ const CreateNewBusiness = () => {
   const [file, setFile] = useState();
   const [fileExtension, setFileExtension] = useState();
   const integration = ["integration1", "integration2"];
+  const breadData = [
+    { path: "business", text: "All Business Files " },
+    { path: "createbusiness", text: "Creat new business " },
+  ];
   const getFile = (files) => {
     const file = files.target.files[0].name;
     const extension = file.split(".");
@@ -62,8 +67,9 @@ const CreateNewBusiness = () => {
     console.log("Selected Option", event.target.value);
   };
   return (
-    <CreateBusiness>
+    <CreateBusiness className="home">
       <Navigation></Navigation>
+      <BreadCrumbs breadData={breadData} />
       <Headingcontainer>
         <img src={ArrowLeft} height="16" width="17" />
         <h1>React File Upload</h1>
