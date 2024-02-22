@@ -10,9 +10,9 @@ const ActionLinks = styled.div`
   justify-content: space-evenly;
   width: 100%;
 
-  a {
-    text-decoration: none;
-    color: #1890ff;
+  div {
+    cursor: pointer;
+    color: var(--blue);
   }
 `;
 
