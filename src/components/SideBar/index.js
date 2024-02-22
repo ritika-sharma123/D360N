@@ -67,11 +67,14 @@ const SideBar = () => {
               <MenuItem icon={<DatabaseOutlined />}>
                 <Link to="/datasets">Datasets</Link>
               </MenuItem>
-              <MenuItem icon={<BranchesOutlined />}>
-                <Link to="/manage-integrations"> Manage Integrations</Link>
+              <MenuItem icon={<DatabaseOutlined />}>
+                <Link to="/integrations">Integrations</Link>
               </MenuItem>
               <MenuItem icon={<FileOutlined />}>
                 <Link to="/businessfiles">Business Files</Link>
+              </MenuItem>
+              <MenuItem icon={<BranchesOutlined />}>
+                <Link to="/all-manage-integrations"> Manage Integrations</Link>
               </MenuItem>
             </Menu>
           </SidebarContent>

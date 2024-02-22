@@ -1,13 +1,13 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
-const DataTable = ({ rows, columns }) => {
+const DataTable = ({ rows, columns, handleRowClick }) => {
   return (
     <>
       <DataGrid
         sx={{
           height: 350,
-          width: "950px",
+          maxWidth: "950px",
           ".MuiDataGrid-columnHeaders.MuiDataGrid-withBorderColor.css-1iyq7zh-MuiDataGrid-columnHeaders":
             {
               backgroundColor: "#FAFAFA !important",
@@ -22,6 +22,7 @@ const DataTable = ({ rows, columns }) => {
         columns={columns}
         disableColumnMenu={true}
         disableRowSelectionOnClick
+        onRowClick={handleRowClick}
         slots={{
           noRowsOverlay: () => <>jhgjj</>,
         }}

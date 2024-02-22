@@ -9,6 +9,7 @@ import ManageIntegrationsPage from "./pages/ManageIntegrations";
 import Dashboard from "./pages/DashBoard";
 import React, { useState } from "react";
 import Layout from "./components/Layout";
+import ManageIntegrationInitiate from "./pages/ManageIntegrations/ManageIntegrationInitiate";
 
 const Container = styled.div``;
 const App = () => {
@@ -29,8 +30,12 @@ const App = () => {
               <Route path="/" element={<Navigate replace to="/dashboard" />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route
-                path="/manage-integrations"
+                path="/all-manage-integrations"
                 element={<ManageIntegrationsPage />}
+              />
+              <Route
+                path="/all-manage-integrations/:id"
+                element={<ManageIntegrationInitiate />}
               />
             </Routes>
           </Container>
