@@ -15,6 +15,7 @@ const LoginCardDiv = styled.div`
   align-items: center;
   top: 10%;
   position: relative;
+  font-family: var(--font-family);
 `;
 
 const LoginCard = styled.div`
@@ -67,7 +68,7 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const LoginPage = ({onLogin}) => {
+const LoginPage = ({ onLogin }) => {
   const [creds, setCreds] = useState({
     userName: "",
     passWord: "",
@@ -88,18 +89,17 @@ const LoginPage = ({onLogin}) => {
 
   const handleLogin = () => {
     // Perform authentication logic here
-    if(creds.userName==='admin'&& creds.passWord==='password')
-   {
-    setIsLoggedIn(true);
-    onLogin(creds.userName,creds.passWord);
-   }
+    if (creds.userName === "admin" && creds.passWord === "password") {
+      setIsLoggedIn(true);
+      onLogin(creds.userName, creds.passWord);
+    }
   };
 
   return (
-   <div>
-    <HeaderContainer>
-    <img src={Logo} alt="Logo"></img>
-    </HeaderContainer>
+    <div>
+      <HeaderContainer>
+        <img src={Logo} alt="Logo"></img>
+      </HeaderContainer>
       <LoginCardDiv>
         <LoginCard>
           <h3 className="login-card">Log In</h3>
@@ -183,8 +183,7 @@ const LoginPage = ({onLogin}) => {
           </ForgotPasswordText>
         </LoginCard>
       </LoginCardDiv>
-
-   </div>
+    </div>
   );
 };
 

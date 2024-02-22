@@ -9,10 +9,10 @@ import ManageIntegrationsPage from "./pages/ManageIntegrations";
 import Dashboard from "./pages/DashBoard";
 import React, { useState } from "react";
 import Layout from "./components/Layout";
+import ManageIntegrationInitiate from "./pages/ManageIntegrations/ManageIntegrationInitiate";
 
 const Container = styled.div``;
 const App = () => {
-  debugger;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handelLogin = (username, passWord) => {
     if (username === "admin" && passWord === "password") {
@@ -31,6 +31,14 @@ const App = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/business" element={<Business />} />
               <Route path="/createbusiness" element={<CreateNewBusiness />} />
+              <Route
+                path="/all-manage-integrations"
+                element={<ManageIntegrationsPage />}
+              />
+              <Route
+                path="/all-manage-integrations/:id"
+                element={<ManageIntegrationInitiate />}
+              />
             </Routes>
           </Container>
         </div>

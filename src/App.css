@@ -1,11 +1,16 @@
 :root {
   --button-background-color: #ff7a45;
-  --font: "Roboto";
+  --font-family: "Anek Devanagari";
+  --font-size: "18px";
+
+  /* colors */
+  --grey: #f5f5f5;
+  --blue: #1890ff;
+  --white: #ffffff;
 }
 
 html,
 body {
-  font-family: var(--font);
   padding: 0px;
   margin: 0px;
 }
@@ -15,7 +20,6 @@ body {
 }
 
 .home > h1 {
-  font-family: Roboto;
   margin: 0px;
   padding: 8px;
   line-height: 50px;
@@ -23,7 +27,7 @@ body {
 }
 .home {
   background-color: #ffffff; /* Used if the image is unavailable */
-  margin-left: 300px;
+  margin-left: 280px;
   margin-top: 0px;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
@@ -36,11 +40,6 @@ body {
   to {
     transform: rotate(360deg);
   }
-}
-*/ body {
-  font-family: "Roboto";
-  padding: 0px;
-  margin: 0px;
 }
 
 .App-logo {
