@@ -65,7 +65,6 @@ const ManageIntegrationsPage = () => {
         rows={sampleRowData}
         handleRowClick={(row) => handleRowClick(row)}
       />
-      <ProgressBar scale="20" />
     </div>
   );
 };
