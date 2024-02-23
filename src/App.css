@@ -13,6 +13,7 @@ html,
 body {
   padding: 0px;
   margin: 0px;
+  overflow: hidden;
 }
 
 .App {
@@ -26,6 +27,9 @@ body {
   color: #000000d9;
 }
 .home {
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
   background-color: #ffffff; /* Used if the image is unavailable */
   margin-left: 280px;
   margin-top: 0px;

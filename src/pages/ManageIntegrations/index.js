@@ -3,6 +3,7 @@ import DataTable from "../../components/DataTable";
 import { sampleRowData, sampleColumnData } from "../../mocks/SampleData";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import ProgressBar from "../../components/ProgressBar/index";
 
 const ActionLinks = styled.div`
   display: flex;
@@ -64,6 +65,7 @@ const ManageIntegrationsPage = () => {
         rows={sampleRowData}
         handleRowClick={(row) => handleRowClick(row)}
       />
+      <ProgressBar scale="20" />
     </div>
   );
 };

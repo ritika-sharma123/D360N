@@ -2,13 +2,12 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const DefaultProgressBarDiv = styled.div`
-  max-width: 400px;
-  height: 56px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 
-  div:last-child {
+  div {
     text-align: center;
   }
 `;
@@ -38,7 +37,12 @@ const ScalingDiv = styled.div`
   border-radius: 100px;
 `;
 
-const ProgressBar = ({ scale = 100 }) => {
+const ProgressBar = ({
+  scale = 100,
+  text1 = "raw layer",
+  text2,
+  status = "in-progress",
+}) => {
   useEffect(() => {
     progressScalingBackground(scale);
   }, [scale]);
@@ -75,6 +79,9 @@ const ProgressBar = ({ scale = 100 }) => {
           )}
         </div>
       </DefaultProgressBar>
+      <div>
+        {text1} is in {status}
+      </div>
       <div>{scale}/100 Files Transferred</div>
     </DefaultProgressBarDiv>
   );

@@ -10,7 +10,6 @@ import TextAreaInput from "../../../components/TextArea";
 import SelectorInput from "../../../components/Selector";
 import BreadCrumbs from "../../../components/BreadCrumbs";
 const CreateBusiness = styled.div`
-  width: calc(100% - 300px);
   display: flex;
   padding: 20px;
   flex-direction: column;

@@ -7,8 +7,6 @@ export const sampleRowData = [
     align: "center",
   },
   { id: 2, integrations: "Integration 2", description: "ABCD", action: 14 },
-  { id: 3, integrations: "Integration 3", description: "ABCD", action: 14 },
-  { id: 4, integrations: "Integration 4", description: "ABCD", action: 14 },
 ];
 
 export const sampleColumnData = [

@@ -7,26 +7,30 @@ const DefaultButtonDiv = styled.div`
 `;
 
 const DefaultButton = styled.button`
-  width: 100px;
+  width: auto;
   height: 40px;
   border: 1px solid transparent;
   border-radius: 2px;
   background-color: ${(props) =>
     props.backgroundColor
       ? props.backgroundColor
+      : props.isDisabled
+      ? "var(--grey)"
       : "var(--button-background-color)"};
-  color: ${(props) => (props.color ? props.color : "")};
+  color: ${(props) =>
+    props.color ? props.color : props.isDisabled ? "grey" : "white"};
   font-size: 16px;
   cursor: pointer;
 `;
 
-const Button = ({ name, backgroundColor, color, onClick }) => {
+const Button = ({ name, backgroundColor, color, onClick, isDisabled }) => {
   return (
     <DefaultButtonDiv>
       <DefaultButton
         color={color}
         backgroundColor={backgroundColor}
         onClick={onClick}
+        disabled={isDisabled}
       >
         {name}
       </DefaultButton>
