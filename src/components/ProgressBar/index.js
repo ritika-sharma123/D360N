@@ -11,6 +11,9 @@ const DefaultProgressBarDiv = styled.div`
   div:last-child {
     text-align: center;
   }
+  .progrsstext {
+    visibility: hidden;
+  }
 `;
 
 const DefaultProgressBar = styled.div`
@@ -20,7 +23,6 @@ const DefaultProgressBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
   margin-top: 5px;
 `;
 
@@ -28,28 +30,30 @@ const Progress = styled.div`
   width: 100%;
   height: 10px;
   background-color: var(--grey);
-  border-radius: 100px;
 `;
 
 const ScalingDiv = styled.div`
   width: ${(props) => (props.width ? props.width : "")};
   background-color: ${(props) => (props.background ? props.background : "")};
+  transition: background-color 2000ms linear;
+
   height: 10px;
-  border-radius: 100px;
 `;
 
-const ProgressBar = ({ scale = 100 }) => {
+const ProgressBar = ({ scale, status }) => {
   useEffect(() => {
-    progressScalingBackground(scale);
-  }, [scale]);
+    progressScalingBackground(status);
+    console.log("hello222", scale, status);
+  }, [status]);
 
   const progressScalingBackground = (value) => {
+    console.log("hel", value);
     let backgroundColor = "";
-    if (value <= 30) {
+    if (value == "Queued") {
       backgroundColor = "#1890FF";
-    } else if (value > 30 && value <= 60) {
+    } else if (value == "InProgress") {
       backgroundColor = "#FFFF00";
-    } else if (value > 60) {
+    } else if (value == "Succeeded") {
       backgroundColor = "#52C41A";
     }
     return backgroundColor;
@@ -60,13 +64,13 @@ const ProgressBar = ({ scale = 100 }) => {
       <DefaultProgressBar>
         <Progress>
           <ScalingDiv
-            background={progressScalingBackground(scale)}
+            background={progressScalingBackground(status)}
             width={`${scale}%`}
           ></ScalingDiv>
         </Progress>
         <div>
           {scale !== 100 ? (
-            `${scale}%`
+            ``
           ) : (
             <i
               style={{ color: "#52C41A", fontSize: 20, height: 14 }}
@@ -75,7 +79,7 @@ const ProgressBar = ({ scale = 100 }) => {
           )}
         </div>
       </DefaultProgressBar>
-      <div>{scale}/100 Files Transferred</div>
+      <div className="progrsstext">{scale}/100 Files Transferred</div>
     </DefaultProgressBarDiv>
   );
 };

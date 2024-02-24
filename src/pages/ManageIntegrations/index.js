@@ -22,7 +22,7 @@ const ManageIntegrationsPage = () => {
   const createColumnsData = () => {
     let columnData = [];
     sampleColumnData.forEach((item, index) => {
-      if (item.headerName === "Actions") {
+      if (item.field === "action") {
         columnData.push({
           ...item,
           renderCell: (props) => {
@@ -52,7 +52,9 @@ const ManageIntegrationsPage = () => {
   }, [sampleColumnData]);
 
   const handleRoute = (rowDetail) => {
-    navigate(`/all-manage-integrations/${rowDetail.id}`, { rowDetail });
+    navigate(`/all-manage-integrations/${rowDetail.id}`, {
+      state: { rowDetail: rowDetail.row },
+    });
   };
 
   return (
