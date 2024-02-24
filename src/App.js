@@ -16,7 +16,8 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handelLogin = (username, passWord) => {
     if (username === "admin" && passWord === "password") {
-      setIsLoggedIn(true);
+        if (fetch("/login").then((response)=>console.log(response))){
+      }
     }
   };
 

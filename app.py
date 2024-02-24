@@ -6,17 +6,16 @@ from azure.mgmt.datafactory.models import RunFilterParameters, DatasetReference
 from datetime import datetime
 from datetime import timedelta
 import json
-
+from D360N import az_methods
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
 
 
-@app.route('/landing_page')
-def test():
-    for i in range(0,100):
-        print(i)
-    return "done"
+@app.route('/login')
+def azlogin():
+    login_msg=az_methods.azlogin()
+    return login_msg
 
 
 
