@@ -43,11 +43,9 @@ const ScalingDiv = styled.div`
 const ProgressBar = ({ scale, status }) => {
   useEffect(() => {
     progressScalingBackground(status);
-    console.log("hello222", scale, status);
   }, [status]);
 
   const progressScalingBackground = (value) => {
-    console.log("hel", value);
     let backgroundColor = "";
     if (value == "Queued") {
       backgroundColor = "#1890FF";

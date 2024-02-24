@@ -55,7 +55,7 @@ const ManageIntegrationInitiate = () => {
   const [isDisabled, setIsDisabled] = useState(false);
   const handleClick = () => handleProgress();
   const [data, setData] = useState([]);
-  const [count, setCount] = useState(0);
+  const [runId, setRunId] = useState();
 
   const progressData = [
     { raw: "Queued", silver: "Queued", gold: "Queued", scale: 100 },
@@ -65,32 +65,27 @@ const ManageIntegrationInitiate = () => {
     { raw: "Succeeded", silver: "Succeeded", gold: "Succeeded", scale: 100 },
   ];
 
- const pollStatus = async(run_id) =>{
+  const pollStatus = async (run_id) => {
+    const pp_progress = await fetch(`/execution_status/${run_id}`);
+    const pp_progress_json = await pp_progress.json();
+    console.log("Data:", pp_progress_json);
+    setData([{ ...progressData[0], scale: 100 }]);
+  };
 
-        while (true) {
+  const handleProgress = async () => {
+    const response = await fetch("/execute_pipeline/InitialLoad");
+    const res_json = await response.json();
+    const run_id = res_json.run_id;
+    var i = 0;
 
-            const pp_progress = await fetch(`/execution_status/${run_id}`);
-            const pp_progress_json = await pp_progress.json();
-            console.log("Data:",pp_progress_json)
+    pollStatus(run_id);
+    setInterval(() => {
+      i++;
 
-    if (pp_progress_json.raw_status === 'Succeeded' && status.silver_status === 'Succeeded' && status.gold_status === 'Succeeded') {
-      console.log('Process completed successfully!');
-      break;
-    }
-    await new Promise(resolve => setTimeout(resolve, 1000)); // 1000 milliseconds = 1 second
-  }
-  }
-
-
-
-
-  const handleProgress = async() => {
-        const response = await fetch("/execute_pipeline/InitialLoad");
-        const res_json = await response.json();
-        const run_id = res_json.run_id;
-        pollStatus(run_id)
-
-
+      if (i < 5) {
+        pollStatus(run_id);
+      }
+    }, 5000);
   };
   const breadData = [
     { path: "/all-manage-integrations", text: "All Integrations" },
@@ -98,8 +93,6 @@ const ManageIntegrationInitiate = () => {
   ];
 
   const handleInitiateLoad = () => {
-
-
     setIsDisabled(true);
   };
 
@@ -124,17 +117,17 @@ const ManageIntegrationInitiate = () => {
           <ProgressBar
             scale={data[0]?.scale}
             width="100px"
-            status={data[0]?.raw}
+            status={data[0]?.raw_status}
           />
           <ProgressBar
             scale={data[0]?.scale}
             width="100px"
-            status={data[0]?.silver}
+            status={data[0]?.silver_status}
           />
           <ProgressBar
             scale={data[0]?.scale}
             width="100px"
-            status={data[0]?.gold}
+            status={data[0]?.gold_status}
           />
         </ProgressBarContainer>
 
