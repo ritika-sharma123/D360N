@@ -8,3 +8,5 @@ def azlogin():
     except Exception as e:
         print(f"Error in execution: {e}")
         return {"status":"Credential Mismatch"}
+
+

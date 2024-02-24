@@ -73,7 +73,7 @@ def generate(datafactory_client,resource_group_name,data_factory_name,pipeline_r
         return activity_runs_response,pipeline_run_response,pipeline_run_status
 
 
-@app.route('/execution_status/<run_id>')
+@app.route('/execution_status/<run_id>', methods=['GET', 'POST'])
 def progress(run_id):
     subscription_id = "8d63c2a6-9024-4e26-84b4-74865cdbf4fd"
     resource_group_name = "rg-datalake"

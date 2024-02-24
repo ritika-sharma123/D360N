@@ -64,18 +64,33 @@ const ManageIntegrationInitiate = () => {
     { raw: "Succeeded", silver: "Succeeded", gold: "InProgress", scale: 100 },
     { raw: "Succeeded", silver: "Succeeded", gold: "Succeeded", scale: 100 },
   ];
-  console.log(data);
-  const handleProgress = () => {
-    var i = 0;
-    setData([progressData[0]]);
 
-    setInterval(() => {
-      i++;
+ const pollStatus = async(run_id) =>{
 
-      if (i < 5) {
-        setData([progressData[i]]);
-      }
-    }, 5000);
+        while (true) {
+
+            const pp_progress = await fetch(`/execution_status/${run_id}`);
+            const pp_progress_json = await pp_progress.json();
+            console.log("Data:",pp_progress_json)
+
+    if (pp_progress_json.raw_status === 'Succeeded' && status.silver_status === 'Succeeded' && status.gold_status === 'Succeeded') {
+      console.log('Process completed successfully!');
+      break;
+    }
+    await new Promise(resolve => setTimeout(resolve, 1000)); // 1000 milliseconds = 1 second
+  }
+  }
+
+
+
+
+  const handleProgress = async() => {
+        const response = await fetch("/execute_pipeline/InitialLoad");
+        const res_json = await response.json();
+        const run_id = res_json.run_id;
+        pollStatus(run_id)
+
+
   };
   const breadData = [
     { path: "/all-manage-integrations", text: "All Integrations" },
@@ -83,6 +98,8 @@ const ManageIntegrationInitiate = () => {
   ];
 
   const handleInitiateLoad = () => {
+
+
     setIsDisabled(true);
   };
 

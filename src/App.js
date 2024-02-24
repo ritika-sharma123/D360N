@@ -14,9 +14,13 @@ import ManageIntegrationInitiate from "./pages/ManageIntegrations/ManageIntegrat
 const Container = styled.div``;
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const handelLogin = (username, passWord) => {
+  const handelLogin = async(username, passWord)  => {
     if (username === "admin" && passWord === "password") {
-        if (fetch("/login").then((response)=>console.log(response))){
+        const response = await fetch("/login");
+        const res_json = await response.json();
+        console.log(res_json.status);
+if (res_json.status==="Succesfully Logged in"){
+            setIsLoggedIn(true);
       }
     }
   };
