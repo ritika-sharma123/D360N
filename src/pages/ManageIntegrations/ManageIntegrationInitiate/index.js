@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router";
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router";
 import DataTable from "../../../components/DataTable";
 import { sampleColumnData1, sampleRowData1 } from "../../../mocks/SampleData";
 import ArrowLeft from "../../../images/ArrowLeft.png";
@@ -45,56 +45,44 @@ const ProgressBarContainer = styled.div`
   gap: 0px;
 `;
 const ManageIntegrationInitiate = () => {
-  // const { pathname } = useLocation();
+  //const { pathname } = useLocation();
   const {
     state: { rowDetail },
   } = useLocation();
   const navigate = useNavigate();
-  const { id } = useParams();
-
   const [isDisabled, setIsDisabled] = useState(false);
-  const handleClick = () => handleProgress();
-  const [data, setData] = useState([]);
-  const [runId, setRunId] = useState();
-
-  const progressData = [
-    { raw: "Queued", silver: "Queued", gold: "Queued", scale: 100 },
-    { raw: "InProgress", silver: "Queued", gold: "Queued", scale: 100 },
-    { raw: "Succeeded", silver: "InProgress", gold: "Queued", scale: 100 },
-    { raw: "Succeeded", silver: "Succeeded", gold: "InProgress", scale: 100 },
-    { raw: "Succeeded", silver: "Succeeded", gold: "Succeeded", scale: 100 },
-  ];
-
+  const [data, setData] = useState({});
   const pollStatus = async (run_id) => {
     const pp_progress = await fetch(`/execution_status/${run_id}`);
     const pp_progress_json = await pp_progress.json();
     console.log("Data:", pp_progress_json);
-    setData([{ ...progressData[0], scale: 100 }]);
+    setData({ ...pp_progress_json, scale: 100 });
+    return pp_progress_json;
   };
-
+  console.log("data:::", data);
   const handleProgress = async () => {
+    setIsDisabled(true);
     const response = await fetch("/execute_pipeline/InitialLoad");
     const res_json = await response.json();
     const run_id = res_json.run_id;
-    var i = 0;
-
     pollStatus(run_id);
-    setInterval(() => {
-      i++;
-
-      if (i < 5) {
-        pollStatus(run_id);
+    const intervalID = setInterval(() => {
+      let res = pollStatus(run_id);
+      if (
+        res.raw_status === "Succeeded" &&
+        res.gold_status === "Succeeded" &&
+        res.silver_status === "Succeeded"
+      ) {
+        clearInterval(intervalID);
       }
     }, 5000);
+    return () => clearInterval(intervalID);
   };
+
   const breadData = [
     { path: "/all-manage-integrations", text: "All Integrations" },
     { path: "all-manage-integrations/:id", text: "Manage Integrations" },
   ];
-
-  const handleInitiateLoad = () => {
-    setIsDisabled(true);
-  };
 
   return (
     <ManageIntegration className="home">
@@ -108,26 +96,26 @@ const ManageIntegrationInitiate = () => {
           alt=""
           onClick={() => navigate(-1)}
         />
-        <h1>{rowDetail?.integration_name}</h1>
+        <h1>{rowDetail.integration_name}</h1>
       </Headingcontainer>
       <br></br>
       <DataTable rows={sampleRowData1} columns={sampleColumnData1} />
       <ProcessDiv>
         <ProgressBarContainer>
           <ProgressBar
-            scale={data[0]?.scale}
+            scale={data?.scale}
             width="100px"
-            status={data[0]?.raw_status}
+            status={data?.raw_status}
           />
           <ProgressBar
-            scale={data[0]?.scale}
+            scale={data?.scale}
             width="100px"
-            status={data[0]?.silver_status}
+            status={data?.silver_status}
           />
           <ProgressBar
-            scale={data[0]?.scale}
+            scale={data?.scale}
             width="100px"
-            status={data[0]?.gold_status}
+            status={data?.gold_status}
           />
         </ProgressBarContainer>
 

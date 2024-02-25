@@ -52,8 +52,8 @@ const ManageIntegrationsPage = () => {
   }, [sampleColumnData]);
 
   const handleRoute = (rowDetail) => {
-    navigate(`/all-manage-integrations/${rowDetail.id}`, {
-      state: { rowDetail: rowDetail.row },
+    navigate(`/all-manage-integrations/${rowDetail?.row.integration_name}`, {
+      state: { rowDetail: rowDetail?.row },
     });
   };
 

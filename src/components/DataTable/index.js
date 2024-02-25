@@ -23,6 +23,9 @@ const DataTable = ({ rows, columns, handleRowClick }) => {
         disableColumnMenu={true}
         disableRowSelectionOnClick
         onRowClick={handleRowClick}
+        hideFooter
+        hideFooterPagination
+        getRowHeight={() => "auto"}
         slots={{
           noRowsOverlay: () => <>jhgjj</>,
         }}
