@@ -54,7 +54,7 @@ const ManageIntegrationInitiate = () => {
 
   const [isDisabled, setIsDisabled] = useState(false);
   const handleClick = () => handleProgress();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [runId, setRunId] = useState();
 
   const progressData = [
@@ -69,7 +69,7 @@ const ManageIntegrationInitiate = () => {
     const pp_progress = await fetch(`/execution_status/${run_id}`);
     const pp_progress_json = await pp_progress.json();
     console.log("Data:", pp_progress_json);
-    setData([{ ...progressData[0], scale: 100 }]);
+    setData({ ...pp_progress_json, scale: 100 });
   };
 
   const handleProgress = async () => {
@@ -82,7 +82,7 @@ const ManageIntegrationInitiate = () => {
     setInterval(() => {
       i++;
 
-      if (i < 5) {
+      if (i < 100) {
         pollStatus(run_id);
       }
     }, 5000);
@@ -115,19 +115,19 @@ const ManageIntegrationInitiate = () => {
       <ProcessDiv>
         <ProgressBarContainer>
           <ProgressBar
-            scale={data[0]?.scale}
+            scale={data?.scale}
             width="100px"
-            status={data[0]?.raw_status}
+            status={data?.raw_status}
           />
           <ProgressBar
-            scale={data[0]?.scale}
+            scale={data?.scale}
             width="100px"
-            status={data[0]?.silver_status}
+            status={data?.silver_status}
           />
           <ProgressBar
-            scale={data[0]?.scale}
+            scale={data?.scale}
             width="100px"
-            status={data[0]?.gold_status}
+            status={data?.gold_status}
           />
         </ProgressBarContainer>
 
