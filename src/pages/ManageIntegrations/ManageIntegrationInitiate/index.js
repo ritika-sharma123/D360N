@@ -59,7 +59,6 @@ const ManageIntegrationInitiate = () => {
     setData({ ...pp_progress_json, scale: 100 });
     return pp_progress_json;
   };
-  console.log("data:::", data);
   const handleProgress = async () => {
     setIsDisabled(true);
     const response = await fetch("/execute_pipeline/InitialLoad");
