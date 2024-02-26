@@ -164,7 +164,7 @@ const ManageIntegrationInitiate = () => {
             <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
           </div>
           <div>
-            <ColorBox Color="red" Text="Cancled"></ColorBox>
+            <ColorBox Color="red" Text="Cancelled"></ColorBox>
           </div>
         </BoxContainer>
       </ColorBoxContainer>
