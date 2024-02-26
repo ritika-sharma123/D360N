@@ -40,7 +40,7 @@ const ScalingDiv = styled.div`
   height: 10px;
 `;
 
-const ProgressBar = ({ scale, status }) => {
+const ProgressBar = ({ scale, status, Text }) => {
   useEffect(() => {
     progressScalingBackground(status);
   }, [status]);
@@ -77,7 +77,10 @@ const ProgressBar = ({ scale, status }) => {
           )}
         </div>
       </DefaultProgressBar>
-      <div className="progrsstext">{status}</div>
+      <div className="progrsstext">
+        {Text}
+        {status}
+      </div>
     </DefaultProgressBarDiv>
   );
 };
