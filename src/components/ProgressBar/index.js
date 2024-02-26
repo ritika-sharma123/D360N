@@ -12,7 +12,7 @@ const DefaultProgressBarDiv = styled.div`
     text-align: center;
   }
   .progrsstext {
-    visibility: hidden;
+    width: 120px;
   }
 `;
 
@@ -77,7 +77,7 @@ const ProgressBar = ({ scale, status }) => {
           )}
         </div>
       </DefaultProgressBar>
-      <div className="progrsstext">{scale}/100 Files Transferred</div>
+      <div className="progrsstext">{status}</div>
     </DefaultProgressBarDiv>
   );
 };

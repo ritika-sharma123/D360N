@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate, useLocation } from "react-router";
 import DataTable from "../../../components/DataTable";
 import { sampleColumnData1, sampleRowData1 } from "../../../mocks/SampleData";
 import ArrowLeft from "../../../images/ArrowLeft.png";
@@ -7,6 +7,7 @@ import styled from "styled-components";
 import BreadCrumbs from "../../../components/BreadCrumbs";
 import Button from "../../../components/Button";
 import ProgressBar from "../../../components/ProgressBar";
+import ColorBox from "../../../components/ColorBox";
 const ManageIntegration = styled.div`
   display: flex;
   padding: 20px;
@@ -44,14 +45,35 @@ const ProgressBarContainer = styled.div`
   display: flex;
   gap: 0px;
 `;
+const ColorBoxContainer = styled.div`
+  display: flex;
+
+  width: 100%;
+  gap: 10px;
+
+  div {
+    display: flex;
+  }
+`;
+const BlankDiv = styled.div`
+  width: 80%;
+`;
+const BoxContainer = styled.div`
+  width: 20%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+`;
 const ManageIntegrationInitiate = () => {
   //const { pathname } = useLocation();
   const {
     state: { rowDetail },
   } = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams();
   const [isDisabled, setIsDisabled] = useState(false);
   const [data, setData] = useState({});
+
   const pollStatus = async (run_id) => {
     const pp_progress = await fetch(`/execution_status/${run_id}`);
     const pp_progress_json = await pp_progress.json();
@@ -59,8 +81,9 @@ const ManageIntegrationInitiate = () => {
     setData({ ...pp_progress_json, scale: 100 });
     return pp_progress_json;
   };
+
+  console.log("data:::", data);
   const handleProgress = async () => {
-    setIsDisabled(true);
     const response = await fetch("/execute_pipeline/InitialLoad");
     const res_json = await response.json();
     const run_id = res_json.run_id;
@@ -124,6 +147,23 @@ const ManageIntegrationInitiate = () => {
           isDisabled={isDisabled}
         />
       </ProcessDiv>
+      <ColorBoxContainer>
+        <BlankDiv></BlankDiv>
+        <BoxContainer>
+          <div>
+            <ColorBox Color="#1890FF" Text="Queued"></ColorBox>
+          </div>
+          <div>
+            <ColorBox Color="#FFFF00" Text="InProgress"></ColorBox>
+          </div>
+          <div>
+            <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
+          </div>
+          <div>
+            <ColorBox Color="red" Text="Cancled"></ColorBox>
+          </div>
+        </BoxContainer>
+      </ColorBoxContainer>
     </ManageIntegration>
   );
 };
