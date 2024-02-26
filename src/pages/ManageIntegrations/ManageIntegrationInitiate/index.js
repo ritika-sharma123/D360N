@@ -128,19 +128,19 @@ const ManageIntegrationInitiate = () => {
             scale={data?.scale}
             width="100px"
             status={data?.raw_status}
-            Text="Raw Status"
+            Text={data?.silver_status ? "Raw" : ""}
           />
           <ProgressBar
             scale={data?.scale}
             width="100px"
             status={data?.silver_status}
-            Text="Silver Status"
+            Text={data?.silver_status ? "Silver" : ""}
           />
           <ProgressBar
             scale={data?.scale}
             width="100px"
             status={data?.gold_status}
-            Text="Gold Status"
+            Text={data?.silver_status ? "Gold" : ""}
           />
         </ProgressBarContainer>
 
