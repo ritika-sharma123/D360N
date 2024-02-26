@@ -84,6 +84,7 @@ const ManageIntegrationInitiate = () => {
 
   console.log("data:::", data);
   const handleProgress = async () => {
+    setIsDisabled(true);
     const response = await fetch("/execute_pipeline/InitialLoad");
     const res_json = await response.json();
     const run_id = res_json.run_id;
@@ -128,19 +129,19 @@ const ManageIntegrationInitiate = () => {
             scale={data?.scale}
             width="100px"
             status={data?.raw_status}
-            Text={data?.silver_status ? "Raw" : ""}
+            Text={data?.silver_status ? "Raw  " : ""}
           />
           <ProgressBar
             scale={data?.scale}
             width="100px"
             status={data?.silver_status}
-            Text={data?.silver_status ? "Silver" : ""}
+            Text={data?.silver_status ? "Silver  " : ""}
           />
           <ProgressBar
             scale={data?.scale}
             width="100px"
             status={data?.gold_status}
-            Text={data?.silver_status ? "Gold" : ""}
+            Text={data?.silver_status ? "Gold  " : ""}
           />
         </ProgressBarContainer>
 
