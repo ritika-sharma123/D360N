@@ -7,20 +7,25 @@ import CreateNewBusiness from "./pages/Business/CreateNewBusiness";
 import ManageIntegrationsPage from "./pages/ManageIntegrations";
 
 import Dashboard from "./pages/DashBoard";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "./components/Layout";
 import ManageIntegrationInitiate from "./pages/ManageIntegrations/ManageIntegrationInitiate";
+import { useDispatch } from "react-redux";
+import { increment } from "./store/slices/ManageIntegrationSlice";
 
 const Container = styled.div``;
 const App = () => {
+  const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const handelLogin = async(username, passWord)  => {
+  const handelLogin = async (username, passWord) => {
     if (username === "admin" && passWord === "password") {
-        const response = await fetch("/login");
-        const res_json = await response.json();
-        console.log(res_json.status);
-if (res_json.status==="Succesfully Logged in"){
-            setIsLoggedIn(true);
+      const response = await fetch("/login");
+      const res_json = await response.json();
+      console.log(res_json.status);
+      setIsLoggedIn(true);
+      if (res_json.status === "Succesfully Logged in") {
+        setIsLoggedIn(true);
+        dispatch(increment());
       }
     }
   };
