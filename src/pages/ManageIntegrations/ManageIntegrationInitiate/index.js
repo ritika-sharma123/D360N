@@ -129,19 +129,19 @@ const ManageIntegrationInitiate = () => {
             scale={data?.scale}
             width="100px"
             status={data?.raw_status}
-            Text={data?.silver_status ? "Raw  " : ""}
+            Text={data?.silver_status ? "Bronze Layer  " : ""}
           />
           <ProgressBar
             scale={data?.scale}
             width="100px"
             status={data?.silver_status}
-            Text={data?.silver_status ? "Silver  " : ""}
+            Text={data?.silver_status ? "Silver Layer  " : ""}
           />
           <ProgressBar
             scale={data?.scale}
             width="100px"
             status={data?.gold_status}
-            Text={data?.silver_status ? "Gold  " : ""}
+            Text={data?.silver_status ? "Gold Layer " : ""}
           />
         </ProgressBarContainer>
 
