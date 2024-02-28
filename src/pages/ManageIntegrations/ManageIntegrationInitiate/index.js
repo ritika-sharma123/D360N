@@ -37,9 +37,8 @@ const ProcessDiv = styled.div`
   margin-top: 10px;
   padding: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  align-items: end;
+  justify-content: space-around;
 `;
 const ProgressBarContainer = styled.div`
   display: flex;
@@ -124,50 +123,61 @@ const ManageIntegrationInitiate = () => {
       <br></br>
       <DataTable rows={sampleRowData1} columns={sampleColumnData1} />
       <ProcessDiv>
-        <ProgressBarContainer>
-          <ProgressBar
-            scale={data?.scale}
-            width="100px"
-            status={data?.raw_status}
-            Text={data?.silver_status ? "Bronze Layer  " : ""}
-          />
-          <ProgressBar
-            scale={data?.scale}
-            width="100px"
-            status={data?.silver_status}
-            Text={data?.silver_status ? "Silver Layer  " : ""}
-          />
-          <ProgressBar
-            scale={data?.scale}
-            width="100px"
-            status={data?.gold_status}
-            Text={data?.silver_status ? "Gold Layer " : ""}
-          />
-        </ProgressBarContainer>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 20,
+          }}
+        >
+          <ProgressBarContainer>
+            <ProgressBar
+              scale={data?.scale}
+              width="100px"
+              status={data?.raw_status}
+              Text={data?.silver_status ? "Bronze Layer  " : ""}
+            />
+            <ProgressBar
+              scale={data?.scale}
+              width="100px"
+              status={data?.silver_status}
+              Text={data?.silver_status ? "Silver Layer  " : ""}
+            />
+            <ProgressBar
+              scale={data?.scale}
+              width="100px"
+              status={data?.gold_status}
+              Text={data?.silver_status ? "Gold Layer " : ""}
+            />
+          </ProgressBarContainer>
 
-        <Button
-          name="Start Initial Load"
-          onClick={handleProgress}
-          isDisabled={isDisabled}
-        />
+          <Button
+            name="Start Initial Load"
+            onClick={handleProgress}
+            isDisabled={isDisabled}
+          />
+        </div>
+        <div>
+          <ColorBoxContainer>
+            <BlankDiv></BlankDiv>
+            <BoxContainer>
+              <div>
+                <ColorBox Color="#1890FF" Text="Queued"></ColorBox>
+              </div>
+              <div>
+                <ColorBox Color="#FFFF00" Text="InProgress"></ColorBox>
+              </div>
+              <div>
+                <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
+              </div>
+              <div>
+                <ColorBox Color="red" Text="Cancelled"></ColorBox>
+              </div>
+            </BoxContainer>
+          </ColorBoxContainer>
+        </div>
       </ProcessDiv>
-      <ColorBoxContainer>
-        <BlankDiv></BlankDiv>
-        <BoxContainer>
-          <div>
-            <ColorBox Color="#1890FF" Text="Queued"></ColorBox>
-          </div>
-          <div>
-            <ColorBox Color="#FFFF00" Text="InProgress"></ColorBox>
-          </div>
-          <div>
-            <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
-          </div>
-          <div>
-            <ColorBox Color="red" Text="Cancelled"></ColorBox>
-          </div>
-        </BoxContainer>
-      </ColorBoxContainer>
     </ManageIntegration>
   );
 };

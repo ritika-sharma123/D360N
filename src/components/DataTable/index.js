@@ -6,7 +6,7 @@ const DataTable = ({ rows, columns, handleRowClick }) => {
     <>
       <DataGrid
         sx={{
-          height: 350,
+          height: "350px !important",
           maxWidth: "950px",
           ".MuiDataGrid-columnHeaders.MuiDataGrid-withBorderColor.css-1iyq7zh-MuiDataGrid-columnHeaders":
             {
@@ -16,6 +16,12 @@ const DataTable = ({ rows, columns, handleRowClick }) => {
             {
               fontWeight: 600,
               fontSize: 14,
+            },
+          ".MuiDataGrid-virtualScrollerContent.css-1kwdphh-MuiDataGrid-virtualScrollerContent":
+            {
+              width: "auto !important",
+              height: "100.719px !important",
+              minHeight: "100% !important",
             },
         }}
         rows={rows}
