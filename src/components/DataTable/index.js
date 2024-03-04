@@ -7,7 +7,7 @@ const DataTable = ({ rows, columns, handleRowClick }) => {
       <DataGrid
         sx={{
           height: "350px !important",
-          maxWidth: "950px",
+          width: "100% ",
           ".MuiDataGrid-columnHeaders.MuiDataGrid-withBorderColor.css-1iyq7zh-MuiDataGrid-columnHeaders":
             {
               backgroundColor: "#FAFAFA !important",

@@ -38,11 +38,11 @@ const ProcessDiv = styled.div`
   padding: 10px;
   display: flex;
   align-items: end;
-  justify-content: space-around;
 `;
 const ProgressBarContainer = styled.div`
   display: flex;
   gap: 0px;
+  width: 60%;
 `;
 const ColorBoxContainer = styled.div`
   display: flex;
@@ -72,7 +72,44 @@ const ManageIntegrationInitiate = () => {
   const { id } = useParams();
   const [isDisabled, setIsDisabled] = useState(false);
   const [data, setData] = useState({});
-
+  const progressData = [
+    {
+      raw_status: "Queued",
+      silver_status: "Queued",
+      gold_status: "Queued",
+      scale: 100,
+    },
+    {
+      raw_status: "InProgress",
+      silver_status: "Queued",
+      gold_status: "Queued",
+      scale: 100,
+    },
+    {
+      raw_status: "Succeeded",
+      silver_status: "InProgress",
+      gold_status: "Queued",
+      scale: 100,
+    },
+    {
+      raw_status: "Succeeded",
+      silver_status: "Succeeded",
+      gold_status: "InProgress",
+      scale: 100,
+    },
+    {
+      raw_status: "Succeeded",
+      silver_status: "Succeeded",
+      gold_status: "Succeeded",
+      scale: 100,
+    },
+    {
+      raw_status: "Succeeded",
+      silver_status: "Succeeded",
+      gold_status: "Succeeded",
+      scale: 100,
+    },
+  ];
   const pollStatus = async (run_id) => {
     const pp_progress = await fetch(`/execution_status/${run_id}`);
     const pp_progress_json = await pp_progress.json();
@@ -80,9 +117,27 @@ const ManageIntegrationInitiate = () => {
     setData({ ...pp_progress_json, scale: 100 });
     return pp_progress_json;
   };
-
+  const handleProgress = () => {
+    setIsDisabled(true);
+    var i = 0;
+    setData({ ...progressData[0] });
+    const clearId = setInterval(() => {
+      i++;
+      console.log("count:", i);
+      setData({ ...progressData[i] });
+      if (
+        progressData[i].raw_status === "Succeeded" &&
+        progressData[i].gold_status === "Succeeded" &&
+        progressData[i].silver_status === "Succeeded"
+      ) {
+        clearInterval(clearId);
+        console.log("count23:", i);
+      }
+    }, 5000);
+    return () => clearInterval(clearId);
+  };
   console.log("data:::", data);
-  const handleProgress = async () => {
+  const handleProgress1 = async () => {
     setIsDisabled(true);
     const response = await fetch("/execute_pipeline/InitialLoad");
     const res_json = await response.json();
@@ -102,7 +157,7 @@ const ManageIntegrationInitiate = () => {
   };
 
   const breadData = [
-    { path: "/all-manage-integrations", text: "All Integrations" },
+    { path: "all-manage-integrations", text: "All Integrations" },
     { path: "all-manage-integrations/:id", text: "Manage Integrations" },
   ];
 
@@ -129,6 +184,7 @@ const ManageIntegrationInitiate = () => {
             flexDirection: "column",
             alignItems: "center",
             gap: 20,
+            width: "85%",
           }}
         >
           <ProgressBarContainer>
