@@ -12,6 +12,8 @@ import Layout from "./components/Layout";
 import ManageIntegrationInitiate from "./pages/ManageIntegrations/ManageIntegrationInitiate";
 import { useDispatch } from "react-redux";
 import { increment } from "./store/slices/ManageIntegrationSlice";
+import AllIntegration from "./pages/Integrations/AllIntegration";
+import CreateIntegration from "./pages/Integrations/CreateIntegration";
 
 const Container = styled.div``;
 const App = () => {
@@ -41,6 +43,11 @@ const App = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/business" element={<Business />} />
               <Route path="/createbusiness" element={<CreateNewBusiness />} />
+              <Route path="/allintegration" element={<AllIntegration />} />
+              <Route
+                path="/createintegration"
+                element={<CreateIntegration />}
+              />
               <Route
                 path="/all-manage-integrations"
                 element={<ManageIntegrationsPage />}
