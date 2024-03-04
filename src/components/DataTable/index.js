@@ -33,7 +33,7 @@ const DataTable = ({ rows, columns, handleRowClick }) => {
         hideFooterPagination
         getRowHeight={() => "auto"}
         slots={{
-          noRowsOverlay: () => <>jhgjj</>,
+          noRowsOverlay: () => <></>,
         }}
       />
     </>

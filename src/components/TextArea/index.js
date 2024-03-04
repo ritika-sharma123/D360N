@@ -19,13 +19,13 @@ const TextAreaContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const TextAreaInput = ({ getTextAreaValue }) => {
+const TextAreaInput = ({ labelText, getTextAreaValue }) => {
   const GetTextAreaValue = (event) => {
     getTextAreaValue(event);
   };
   return (
     <TextAreaContainer>
-      <Label labelText="Business File Description" />
+      <Label labelText={labelText} />
       <TextArea placeholder="Enter" onChange={GetTextAreaValue} />
     </TextAreaContainer>
   );

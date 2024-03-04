@@ -11,8 +11,8 @@ import React, { useEffect, useState } from "react";
 import Layout from "./components/Layout";
 import ManageIntegrationInitiate from "./pages/ManageIntegrations/ManageIntegrationInitiate";
 import { useDispatch } from "react-redux";
-import { increment } from "./store/slices/ManageIntegrationSlice";
-import DatasetsPage from "./pages/Datasets";
+import DatasetsPage from "./pages/Datasets/index";
+import DatasetDetailPage from "./pages/Datasets/DatasetDetailPage";
 
 const Container = styled.div``;
 const App = () => {
@@ -43,6 +43,8 @@ const App = () => {
               <Route path="/business" element={<Business />} />
               <Route path="/createbusiness" element={<CreateNewBusiness />} />
               <Route path="/datasets" element={<DatasetsPage />} />
+              <Route path="/dataset-detail" element={<DatasetDetailPage />} />
+
               <Route
                 path="/all-manage-integrations"
                 element={<ManageIntegrationsPage />}

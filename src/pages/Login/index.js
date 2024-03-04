@@ -172,7 +172,12 @@ const LoginPage = ({ onLogin }) => {
               )
             }
           />
-          <Button name="Continue" color="#ffffff" onClick={handleLogin} />
+          <Button
+            name="Continue"
+            color="#ffffff"
+            onClick={handleLogin}
+            backgroundColor={`var(--button-background-color)`}
+          />
           <ForgotPasswordText>
             <span>Forgot Password</span>
           </ForgotPasswordText>

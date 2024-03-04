@@ -18,7 +18,14 @@ const ActionLinks = styled.div`
   }
 `;
 
-const AllDatasetsContainer = styled.div``;
+const AllDatasetsContainer = styled.div`
+  padding-top: 10px;
+`;
+const AllDataSets = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+`;
 
 const sampleColumnData = [
   {
@@ -95,12 +102,20 @@ const DatasetsPage = () => {
     });
   };
 
+  const handleClick = () => {
+    navigate("/dataset-detail");
+  };
+
   return (
     <AllDatasetsContainer className="home">
-      <div>
+      <AllDataSets>
         <PageTitle text="All Data Sets" />
-        <Button>Create New</Button>
-      </div>
+        <Button
+          name="Add New Data Set"
+          color="black"
+          onClick={handleClick}
+        ></Button>
+      </AllDataSets>
       <DataTable
         columns={columnData || []}
         rows={rowData || []}

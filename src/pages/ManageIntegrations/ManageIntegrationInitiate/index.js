@@ -156,6 +156,7 @@ const ManageIntegrationInitiate = () => {
             name="Start Initial Load"
             onClick={handleProgress}
             isDisabled={isDisabled}
+            backgroundColor={`var(--button-background-color)`}
           />
         </div>
         <div>
