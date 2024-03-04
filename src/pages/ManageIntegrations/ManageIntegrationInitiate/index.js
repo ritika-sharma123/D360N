@@ -72,44 +72,7 @@ const ManageIntegrationInitiate = () => {
   const { id } = useParams();
   const [isDisabled, setIsDisabled] = useState(false);
   const [data, setData] = useState({});
-  const progressData = [
-    {
-      raw_status: "Queued",
-      silver_status: "Queued",
-      gold_status: "Queued",
-      scale: 100,
-    },
-    {
-      raw_status: "InProgress",
-      silver_status: "Queued",
-      gold_status: "Queued",
-      scale: 100,
-    },
-    {
-      raw_status: "Succeeded",
-      silver_status: "InProgress",
-      gold_status: "Queued",
-      scale: 100,
-    },
-    {
-      raw_status: "Succeeded",
-      silver_status: "Succeeded",
-      gold_status: "InProgress",
-      scale: 100,
-    },
-    {
-      raw_status: "Succeeded",
-      silver_status: "Succeeded",
-      gold_status: "Succeeded",
-      scale: 100,
-    },
-    {
-      raw_status: "Succeeded",
-      silver_status: "Succeeded",
-      gold_status: "Succeeded",
-      scale: 100,
-    },
-  ];
+
   const pollStatus = async (run_id) => {
     const pp_progress = await fetch(`/execution_status/${run_id}`);
     const pp_progress_json = await pp_progress.json();
@@ -117,27 +80,8 @@ const ManageIntegrationInitiate = () => {
     setData({ ...pp_progress_json, scale: 100 });
     return pp_progress_json;
   };
-  const handleProgress = () => {
-    setIsDisabled(true);
-    var i = 0;
-    setData({ ...progressData[0] });
-    const clearId = setInterval(() => {
-      i++;
-      console.log("count:", i);
-      setData({ ...progressData[i] });
-      if (
-        progressData[i].raw_status === "Succeeded" &&
-        progressData[i].gold_status === "Succeeded" &&
-        progressData[i].silver_status === "Succeeded"
-      ) {
-        clearInterval(clearId);
-        console.log("count23:", i);
-      }
-    }, 5000);
-    return () => clearInterval(clearId);
-  };
   console.log("data:::", data);
-  const handleProgress1 = async () => {
+  const handleProgress = async () => {
     setIsDisabled(true);
     const response = await fetch("/execute_pipeline/InitialLoad");
     const res_json = await response.json();
