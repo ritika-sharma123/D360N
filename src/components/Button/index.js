@@ -16,7 +16,7 @@ const DefaultButton = styled.button`
       ? props.backgroundColor
       : props.disabled
       ? "var(--grey)"
-      : "var(--button-background-color)"};
+      : ""};
   color: ${(props) =>
     props.color ? props.color : props.disabled ? "grey" : "white"};
   font-size: 16px;

@@ -12,6 +12,7 @@ import Layout from "./components/Layout";
 import ManageIntegrationInitiate from "./pages/ManageIntegrations/ManageIntegrationInitiate";
 import { useDispatch } from "react-redux";
 import { increment } from "./store/slices/ManageIntegrationSlice";
+import DatasetsPage from "./pages/Datasets";
 
 const Container = styled.div``;
 const App = () => {
@@ -19,14 +20,14 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handelLogin = async (username, passWord) => {
     if (username === "admin" && passWord === "password") {
-      const response = await fetch("/login");
-      const res_json = await response.json();
-      console.log(res_json.status);
+      // const response = await fetch("/login");
+      // const res_json = await response.json();
+      // console.log(res_json.status);
       setIsLoggedIn(true);
-      if (res_json.status === "Succesfully Logged in") {
-        setIsLoggedIn(true);
-        dispatch(increment());
-      }
+      // if (res_json.status === "Succesfully Logged in") {
+      //   setIsLoggedIn(true);
+      //   dispatch(increment());
+      // }
     }
   };
 
@@ -41,6 +42,7 @@ const App = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/business" element={<Business />} />
               <Route path="/createbusiness" element={<CreateNewBusiness />} />
+              <Route path="/datasets" element={<DatasetsPage />} />
               <Route
                 path="/all-manage-integrations"
                 element={<ManageIntegrationsPage />}
