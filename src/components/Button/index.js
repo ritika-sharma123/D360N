@@ -13,10 +13,11 @@ const DefaultButtonDiv = styled.div`
   align-items: center;
   height: 21px;
   border-radius: 2px;
+  display:flex
 `;
 
 const DefaultButton = styled.button`
-  width: 100px;
+  // width: 100px;
   height: 40px;
   border: 1px solid transparent;
   border-radius: 2px;
@@ -28,7 +29,7 @@ const DefaultButton = styled.button`
       : ""};
   color: ${(props) =>
     props.color ? props.color : props.disabled ? "grey" : "white"};
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
 `;
 

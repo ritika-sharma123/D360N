@@ -5,6 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 import PageTitle from "../../components/PageTitle";
 import Button from "../../components/Button";
+import Union from "../../images/Union.png";
 
 const ActionLinks = styled.div`
   display: flex;
@@ -111,10 +112,12 @@ const DatasetsPage = () => {
       <AllDataSets>
         <PageTitle text="All Data Sets" />
         <Button
-          name="Add New Data Set"
-          color="black"
           onClick={handleClick}
-        ></Button>
+          image={Union}
+          name="Add New Data Set"
+          backgroundColor="white"
+          color="black"
+        />
       </AllDataSets>
       <DataTable
         columns={columnData || []}
