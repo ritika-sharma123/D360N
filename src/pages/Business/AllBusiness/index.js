@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import ProgressBar from "../../../components/ProgressBar";
 import Union from "../../../images/Union.png";
+import DataTable from "../../../components/DataTable";
 const AllBusiness = styled.div`
   display: flex;
   align-items: center;
@@ -31,6 +32,7 @@ const Business = () => {
           color="black"
         />
       </AllBusiness>
+      <DataTable columns={[]} rows={[]} />
     </AllBusinessContainer>
   );
 };
