@@ -19,7 +19,7 @@ const TextAreaContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const TextAreaInput = ({ labelText, getTextAreaValue }) => {
+const TextAreaInput = ({ getTextAreaValue, labelText }) => {
   const GetTextAreaValue = (event) => {
     getTextAreaValue(event);
   };
