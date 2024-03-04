@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const DefaultProgressBarDiv = styled.div`
-  max-width: 400px;
+  width: 100%;
   height: 56px;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@ const DefaultProgressBarDiv = styled.div`
     text-align: center;
   }
   .progrsstext {
-    width: 120px;
+    width: 100%;
   }
 `;
 

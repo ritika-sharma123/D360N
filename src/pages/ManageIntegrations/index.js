@@ -15,7 +15,9 @@ const ActionLinks = styled.div`
     color: var(--blue);
   }
 `;
-
+const ManageIntegrationDiv = styled.div`
+  width: calc(100% - 300px);
+`;
 const ManageIntegrationsPage = () => {
   const navigate = useNavigate();
 
@@ -58,7 +60,7 @@ const ManageIntegrationsPage = () => {
   };
 
   return (
-    <div className="home">
+    <ManageIntegrationDiv className="home">
       <h2>Manage Integrations</h2>
       <br></br>
       <DataTable
@@ -66,7 +68,7 @@ const ManageIntegrationsPage = () => {
         rows={sampleRowData}
         handleRowClick={(row) => handleRowClick(row)}
       />
-    </div>
+    </ManageIntegrationDiv>
   );
 };
 

@@ -15,16 +15,16 @@ const BreadCrumbsDiv = styled.div`
 `;
 
 const BreadCrumbs = ({ breadData }) => {
-  const pathy = useLocation();
+  const CurrentPath = useLocation();
   let breadcrumpath = "";
-  let nam = pathy.pathname.split("/").filter((x) => x !== "");
+  let nam = CurrentPath.pathname.split("/").filter((x) => x !== "");
+  console.log("path:", nam);
   return (
     <BreadCrumbsDiv>
       {breadData?.map((name) => {
         if (name.path == nam[0]) {
           return <span>/ {name.text}</span>;
         } else if (breadData[0].path == name.path) {
-          console.log(name.path);
           breadcrumpath += `/${name.path}`;
           return <Link to={breadcrumpath}>{name.text} </Link>;
         } else {

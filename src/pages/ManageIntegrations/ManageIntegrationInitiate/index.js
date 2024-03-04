@@ -38,11 +38,11 @@ const ProcessDiv = styled.div`
   padding: 10px;
   display: flex;
   align-items: end;
-  justify-content: space-around;
 `;
 const ProgressBarContainer = styled.div`
   display: flex;
   gap: 0px;
+  width: 60%;
 `;
 const ColorBoxContainer = styled.div`
   display: flex;
@@ -80,7 +80,6 @@ const ManageIntegrationInitiate = () => {
     setData({ ...pp_progress_json, scale: 100 });
     return pp_progress_json;
   };
-
   console.log("data:::", data);
   const handleProgress = async () => {
     setIsDisabled(true);
@@ -102,7 +101,7 @@ const ManageIntegrationInitiate = () => {
   };
 
   const breadData = [
-    { path: "/all-manage-integrations", text: "All Integrations" },
+    { path: "all-manage-integrations", text: "All Integrations" },
     { path: "all-manage-integrations/:id", text: "Manage Integrations" },
   ];
 
@@ -129,6 +128,7 @@ const ManageIntegrationInitiate = () => {
             flexDirection: "column",
             alignItems: "center",
             gap: 20,
+            width: "85%",
           }}
         >
           <ProgressBarContainer>
