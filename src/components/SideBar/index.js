@@ -68,7 +68,7 @@ const SideBar = () => {
                 <Link to="/datasets">Datasets</Link>
               </MenuItem>
               <MenuItem icon={<DatabaseOutlined />}>
-                <Link to="/integrations">Integrations</Link>
+                <Link to="/allintegration">Integrations</Link>
               </MenuItem>
               <MenuItem icon={<FileOutlined />}>
                 <Link to="/business">Business Files</Link>
