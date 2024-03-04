@@ -12,8 +12,8 @@ const ProgressBarContainer = styled.div`
 `;
 const Business = () => {
   const navigate = useNavigate();
-  //const handleClick = () => navigate("/createbusiness");
-  const handleClick = () => handleProgress();
+  const handleClick = () => navigate("/createbusiness");
+  //const handleClick = () => handleProgress();
   const [data, setData] = useState([]);
   const [count, setCount] = useState(0);
   const countRef = useRef(null);
