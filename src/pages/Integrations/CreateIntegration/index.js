@@ -46,7 +46,16 @@ const ButtonContainer = styled.div`
   margin-top: 10px;
 `;
 const CreateIntegration = () => {
-  const [value, setValue] = useState();
+  const [InputValue, setInputValue] = useState({
+    integration: "",
+    description: "",
+    method: "",
+    sourcetype: "",
+    targettype: "",
+    databasename: "",
+    severname: "",
+    username: "",
+  });
   const [file, setFile] = useState();
   const [fileExtension, setFileExtension] = useState();
   const integration = ["integration1", "integration2"];
@@ -54,13 +63,6 @@ const CreateIntegration = () => {
     { path: "allintegration", text: "All Integration " },
     { path: "createintegration", text: "Creat New  " },
   ];
-  const getFile = (files) => {
-    const file = files.target.files[0].name;
-    const extension = file.split(".");
-    setFile(files.target.files[0]);
-    setFileExtension(extension[extension.length - 1]);
-    console.log("uploaded file", extension[extension.length - 1]);
-  };
   const getTextAreaValue = (event) => {
     console.log("textArea value", event.target.value);
   };
@@ -69,6 +71,13 @@ const CreateIntegration = () => {
   };
   const navigate = useNavigate();
   const goToBack = () => navigate("/allintegration");
+  const HandlerChange = (e) => {
+    const { name, value } = e.target;
+    setInputValue((previous) => ({ ...previous, [name]: value }));
+  };
+  const formHandler = () => {
+    console.log("data", JSON.stringify(InputValue));
+  };
   return (
     <CreateIntegrationDiv className="home">
       <Navigation></Navigation>
@@ -77,31 +86,65 @@ const CreateIntegration = () => {
         <img src={ArrowLeft} height="16" width="17" onClick={goToBack} />
         <h1>Integration Details</h1>
       </Headingcontainer>
-      <Input customClass="integration-input" labelText="Integration Name" />
+      <Input
+        customClass="integration-input"
+        labelText="Integration Name"
+        onChange={HandlerChange}
+        name="integration"
+      />
       <TextAreaInput
         getTextAreaValue={getTextAreaValue}
         labelText="Integration Description"
+        onChange={HandlerChange}
+        name="description"
       />
       <Label labelText="Select Integration Method" />
       <SelectorInput
         optionValue={integration}
         getSelectedValue={getSelectedValue}
+        onChange={HandlerChange}
+        name="method"
       />
       <Label labelText="Select Source Type" />
       <SelectorInput
         optionValue={integration}
         getSelectedValue={getSelectedValue}
+        onChange={HandlerChange}
+        name="sourcetype"
       />
       <Label labelText="Select Target Type" />
       <SelectorInput
         optionValue={integration}
         getSelectedValue={getSelectedValue}
+        onChange={HandlerChange}
+        name="targettype"
       />
-      <Input customClass="integration-input" labelText="Database Name" />
-      <Input customClass="integration-input" labelText="Sever Name" />
-      <Input customClass="integration-input" labelText="UserName" />
+      <Input
+        customClass="integration-input"
+        labelText="Database Name"
+        onChange={HandlerChange}
+        name="databasename"
+      />
+
+      <Input
+        customClass="integration-input"
+        labelText="Sever Name"
+        onChange={HandlerChange}
+        name="severname"
+      />
+      <Input
+        customClass="integration-input"
+        labelText="UserName"
+        onChange={HandlerChange}
+        name="username"
+      />
       <ButtonContainer>
-        <Button name="Save" backgroundcolor="#357eff" color="#fff" />
+        <Button
+          name="Save"
+          backgroundcolor="#357eff"
+          color="#fff"
+          onClick={formHandler}
+        />
         <Button name="Cancel" backgroundcolor="white" color="black" />
       </ButtonContainer>
     </CreateIntegrationDiv>
