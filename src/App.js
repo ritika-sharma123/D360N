@@ -20,6 +20,7 @@ const App = () => {
   const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handelLogin = async (username, passWord) => {
+    console.log("hello");
     if (username === "admin" && passWord === "password") {
       const response = await fetch("/login");
       const res_json = await response.json();

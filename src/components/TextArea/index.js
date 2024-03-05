@@ -19,14 +19,11 @@ const TextAreaContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const TextAreaInput = ({ getTextAreaValue ,labelText}) => {
-  const GetTextAreaValue = (event) => {
-    getTextAreaValue(event);
-  };
+const TextAreaInput = ({ getTextAreaValue, labelText, name, onChange }) => {
   return (
     <TextAreaContainer>
-      <Label labelText={labelText}/>
-      <TextArea placeholder="Enter" onChange={GetTextAreaValue} />
+      <Label labelText={labelText} />
+      <TextArea placeholder="Enter" onChange={onChange} name={name} />
     </TextAreaContainer>
   );
 };
