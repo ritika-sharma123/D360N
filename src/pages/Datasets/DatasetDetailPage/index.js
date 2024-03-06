@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Input from "../../../components/Input";
 import Label from "../../../components/Label";
@@ -8,6 +8,10 @@ import TextAreaInput from "../../../components/TextArea";
 import SelectorInput from "../../../components/Selector";
 import BreadCrumbs from "../../../components/BreadCrumbs";
 import { useNavigate } from "react-router";
+import AzureSqlForm from "../../Forms/azure_sql";
+import AzureBlobForm from "../../Forms/azure_blob";
+import axios from "axios";
+
 const CreateBusiness = styled.div`
   width: calc(100% - 300px);
   display: flex;
@@ -43,43 +47,79 @@ const ButtonContainer = styled.div`
   gap: 10px;
   margin-top: 10px;
 `;
+
+const DataSetType = {
+  "": "",
+  "Azure Sql": "Azure Sql",
+  "Azure Blob": "Azure Blob",
+};
+
 const DatasetDetailPage = () => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     integration: "",
     description: "",
-    method: "",
-    sourcetype: "",
-    targettype: "",
-    databasename: "",
-    severname: "",
-    username: "",
+    input: "",
   });
-  const [value, setValue] = useState();
-  const [file, setFile] = useState();
-  const [fileExtension, setFileExtension] = useState();
-  const integration = ["", "Azure Sql", "Azure Blob"];
+  const [typeFormValues, setTypeFormValues] = useState({});
   const breadData = [
     { path: "datasets", text: "All Data Sets " },
     { path: "dataset-detail", text: "Add New Data Set" },
   ];
-  const getTextAreaValue = (event) => {
-    console.log("textArea value", event.target.value);
-  };
-  const getSelectedValue = (event) => {
-    console.log("Selected Option", event.target.value);
-  };
 
   const handlerChange = (e) => {
     const { name, value } = e.target;
-    setInputValue((previous) => ({ ...previous, [name]: value }));
+    setInputValue((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
   };
 
-  const formHandler = () => {
-    console.log("data", JSON.stringify(inputValue));
+  const formHandler = async () => {
+    console.log("data", { ...inputValue, ...typeFormValues });
+    try {
+      const response = await axios.post("", {
+        ...inputValue,
+        ...typeFormValues,
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  console.log(inputValue.integration);
+  const handleInputValuesChange = (values) => {
+    setTypeFormValues(values);
+  };
+
+  function toggleForms(value) {
+    switch (value) {
+      case "Azure Sql":
+        return (
+          <AzureSqlForm
+            handleInputValuesChange={(values) =>
+              handleInputValuesChange(values)
+            }
+          />
+        );
+      case "Azure Blob":
+        return (
+          <AzureBlobForm
+            handleInputValuesChange={(values) =>
+              handleInputValuesChange(values)
+            }
+          />
+        );
+      default:
+        return "";
+    }
+  }
+
+  useEffect(() => {
+    setTypeFormValues({});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputValue.integration]);
+
   return (
     <CreateBusiness className="home">
       <Navigation></Navigation>
@@ -96,7 +136,7 @@ const DatasetDetailPage = () => {
       </Headingcontainer>
       <Label labelText="Select Data Set Type" />
       <SelectorInput
-        optionValue={integration}
+        optionValue={Object.keys(DataSetType)}
         onChange={handlerChange}
         name="integration"
       />
@@ -111,35 +151,10 @@ const DatasetDetailPage = () => {
         onChange={handlerChange}
         name="description"
       />
-      {inputValue.integration && inputValue.integration === "Azure Sql" ? (
-        <>
-          <Input
-            customClass="business-input"
-            labelText="Data Set server"
-            onChange={handlerChange}
-            name="server"
-          />
-          <Input
-            customClass="business-input"
-            labelText="Data Set server"
-            onChange={handlerChange}
-            name="server"
-          />
-          <Input
-            customClass="business-input"
-            labelText="Data Set server"
-            onChange={handlerChange}
-            name="server"
-          />
-        </>
-      ) : (
-        <Input
-          customClass="business-input"
-          labelText="Data Set server"
-          onChange={handlerChange}
-          name="server"
-        />
-      )}
+
+      {inputValue.integration &&
+        toggleForms(DataSetType[inputValue.integration])}
+
       <ButtonContainer>
         <Button
           name="Save"
