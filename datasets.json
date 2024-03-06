@@ -1,0 +1,15 @@
+{"datasets":[{"id":1,
+"dataset_name":"az_sql",
+        "dataset_description":"Azure SQL Database for Testing",
+"server_name":"asddatalake.database.windows.net",
+"database_name":"DLXpressAZSQL",
+"user_id":"etluser",
+"password":"etl@1234abcd#"},
+{"id":2,
+"dataset_name":"az_blob",
+"dataset_description":"Azure Blob for Testing",
+"storageAccountName":"trialpocstorage" ,
+"storageAccountAccessKey": "q/gzn9mm4SE8JWUdMp7/HG0gzDgPMHk/01QC/JE7QiO2Lc3KND++AoAsncXB37gJxYK/95qkjVpu+ASt/dN8QA==" ,
+"blobContainerName":"dlxpressappdata",
+"mountpoint":"new_mount"
+}]}
