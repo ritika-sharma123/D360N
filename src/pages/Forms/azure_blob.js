@@ -19,9 +19,27 @@ const AzureBlobForm = ({ handleInputValuesChange }) => {
     <BlobForm>
       <Input
         customClass="integration-input"
-        labelText="Server Name"
+        labelText="Storage Account Name"
         onChange={handleChange}
-        name="server_name"
+        name="storage_account_name"
+      />
+      <Input
+        customClass="integration-input"
+        labelText="Storage Account Access Key"
+        onChange={handleChange}
+        name="storage_account_access_key"
+      />
+      <Input
+        customClass="integration-input"
+        labelText="Blob Container Name"
+        onChange={handleChange}
+        name="blob_container_name"
+      />
+      <Input
+        customClass="integration-input"
+        labelText="Mount Point"
+        onChange={handleChange}
+        name="mountpoint"
       />
     </BlobForm>
   );
