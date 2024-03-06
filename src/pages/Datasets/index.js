@@ -30,8 +30,15 @@ const AllDataSets = styled.div`
 
 const sampleColumnData = [
   {
-    field: "datasets",
-    headerName: "Data Sets",
+    field: "dataset_name",
+    headerName: "Datasets Name",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+  },
+  {
+    field: "dataset_description",
+    headerName: "Datasets Description",
     flex: 1,
     headerAlign: "center",
     align: "center",
@@ -48,7 +55,18 @@ const sampleColumnData = [
 
 const DatasetsPage = () => {
   const navigate = useNavigate();
-  const [rowData, setRowData] = useState([]);
+  const [rowData, setRowData] = useState([
+    {
+      dataset_description: "Azure SQL Database for Testing",
+      dataset_name: "az_sql",
+      id: 1,
+    },
+    {
+      dataset_description: "Azure Blob for Testing",
+      dataset_name: "az_blob",
+      id: 2,
+    },
+  ]);
 
   const createColumnsData = () => {
     let columnData = [];
@@ -58,9 +76,14 @@ const DatasetsPage = () => {
           ...item,
           renderCell: (props) => {
             return (
-              <ActionLinks>
-                <div onClick={() => handleRoute(props)}>Remove</div>
-              </ActionLinks>
+              <>
+                <ActionLinks>
+                  <div onClick={() => handleRoute(props)}>Edit</div>
+                </ActionLinks>
+                <ActionLinks>
+                  <div onClick={() => handleRoute(props)}>Delete</div>
+                </ActionLinks>
+              </>
             );
           },
         });
@@ -110,11 +133,11 @@ const DatasetsPage = () => {
   return (
     <AllDatasetsContainer className="home">
       <AllDataSets>
-        <PageTitle text="All Data Sets" />
+        <PageTitle text="All Datasets" />
         <Button
           onClick={handleClick}
           image={Union}
-          name="Add New Data Set"
+          name="Add New Dataset"
           backgroundColor="white"
           color="black"
         />
