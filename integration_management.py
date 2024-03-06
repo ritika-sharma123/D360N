@@ -22,15 +22,16 @@ def save_integration(integration_details):
     with open('integrations.json', 'r') as json_file:
         integrations = json.load(json_file)
 
-    length = len(integrations["datasets"])
+    length = len(integrations["integrations"])
 
     details = {"id": length + 1,
+               "integration_method":integration_details["integration_method"],
                "integration_name": integration_details["integration_name"],
                "integration_description": integration_details["integration_description"],
                "source_dataset": integration_details["source_dataset"],
                "target_dataset": integration_details["target_dataset"]
                }
-    integrations["datasets"].append(details)
+    integrations["integrations"].append(details)
 
 
     with open('integrations.json', 'w') as json_file:

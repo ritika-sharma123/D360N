@@ -3,6 +3,7 @@
         {
             "id": 1,
             "integration_name": "SCDII_AZSQL_to_ADLS_Gen 2",
+            "integration_method": "SCDII",
             "integration_description": "A pipeline implementing SCDII on Azure SQL DB data complied on business file (businessfile.json) associated to the integration",
             "source_dataset": "az_sql",
             "target_dataset": "az_blob"

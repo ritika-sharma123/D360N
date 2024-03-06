@@ -48,11 +48,11 @@ const ButtonContainer = styled.div`
 `;
 const CreateIntegration = () => {
   const [formData, setFormData] = useState({
-    integration: "",
-    description: "",
-    method: "",
-    sourcetype: "",
-    targettype: "",
+     integration_name: "",
+    integration_description: "",
+    integration_method: "",
+    source_dataset: "",
+    target_dataset: "",
   });
   const [file, setFile] = useState();
   const [fileExtension, setFileExtension] = useState();
@@ -79,10 +79,9 @@ const CreateIntegration = () => {
   const formHandler = async () => {
     try {
       const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts",
+        "/save_integration",
         formData
       );
-      console.log("Post created:", response.data);
     } catch (error) {
       console.error("Error creating post:", error);
     }
@@ -90,19 +89,17 @@ const CreateIntegration = () => {
 
   const getDatasets = async () => {
     try {
-      const response = await axios.get("");
-      console.log("datasets dropdoen", response);
+      const response = await axios.get("/list_datasets");
+       const arr = response?.data?.map((item, index) => {
+       return item.dataset_name;
+     });
+     setSource(arr)
+     setTarget(arr)
     } catch (err) {
       console.log(err);
     }
-
-    // const arr = response?.data?.map((item, index) => {
-    //   return item.dataset_name;
-    // });
-
-    // console.log("arr", arr);
   };
-
+console.log("formData",formData)
   useEffect(() => {
     getDatasets();
   }, []);
