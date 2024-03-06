@@ -59,7 +59,7 @@ const CreateIntegration = () => {
   });
   const [file, setFile] = useState();
   const [fileExtension, setFileExtension] = useState();
-  const integration = ["integration1", "integration2"];
+  const integration = ["SCDI", "SCDII","CDC"];
   const breadData = [
     { path: "allintegration", text: "All Integration " },
     { path: "createintegration", text: "Creat New  " },
@@ -115,38 +115,19 @@ const CreateIntegration = () => {
         onChange={HandlerChange}
         name="method"
       />
-      <Label labelText="Select Source Type" />
+      <Label labelText="Select Source" />
       <SelectorInput
         optionValue={integration}
         getSelectedValue={getSelectedValue}
         onChange={HandlerChange}
         name="sourcetype"
       />
-      <Label labelText="Select Target Type" />
+      <Label labelText="Select Target" />
       <SelectorInput
         optionValue={integration}
         getSelectedValue={getSelectedValue}
         onChange={HandlerChange}
         name="targettype"
-      />
-      <Input
-        customClass="integration-input"
-        labelText="Database Name"
-        onChange={HandlerChange}
-        name="databasename"
-      />
-
-      <Input
-        customClass="integration-input"
-        labelText="Sever Name"
-        onChange={HandlerChange}
-        name="severname"
-      />
-      <Input
-        customClass="integration-input"
-        labelText="UserName"
-        onChange={HandlerChange}
-        name="username"
       />
       <ButtonContainer>
         <Button

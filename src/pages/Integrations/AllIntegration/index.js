@@ -76,16 +76,16 @@ const AllIntegration = () => {
   }, [sampleColumnData]);
   const getIntegrations = async () => {
     try {
-      const response = await axios.get("/list_datasets");
+      const response = await axios.get("/list_intergations");
       console.log("response", response);
-      // setRowData(response.data);
+      setRowData(response.data);
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    //getIntegrations();
+    getIntegrations();
   }, []);
   return (
     <div className="home">

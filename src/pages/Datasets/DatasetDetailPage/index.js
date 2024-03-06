@@ -50,16 +50,16 @@ const ButtonContainer = styled.div`
 
 const DataSetType = {
   "": "",
-  "Azure Sql": "Azure Sql",
+  "Azure SQL": "Azure SQL",
   "Azure Blob": "Azure Blob",
 };
 
 const DatasetDetailPage = () => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
-    integration: "",
-    description: "",
-    input: "",
+    dataset_type: "",
+    dataset_description: "",
+    dataset_name: "",
   });
   const [typeFormValues, setTypeFormValues] = useState({});
   const breadData = [
@@ -77,11 +77,10 @@ const DatasetDetailPage = () => {
 
   const formHandler = async () => {
     console.log("data", { ...inputValue, ...typeFormValues });
+    const data = { ...inputValue, ...typeFormValues };
     try {
-      const response = await axios.post("", {
-        ...inputValue,
-        ...typeFormValues,
-      });
+      const response = await axios.post("/save_dataset",
+        data      );
       console.log(response);
     } catch (err) {
       console.log(err);
@@ -94,7 +93,7 @@ const DatasetDetailPage = () => {
 
   function toggleForms(value) {
     switch (value) {
-      case "Azure Sql":
+      case "Azure SQL":
         return (
           <AzureSqlForm
             handleInputValuesChange={(values) =>
@@ -118,7 +117,7 @@ const DatasetDetailPage = () => {
   useEffect(() => {
     setTypeFormValues({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValue.integration]);
+  }, [inputValue.dataset_type]);
 
   return (
     <CreateBusiness className="home">
@@ -138,22 +137,22 @@ const DatasetDetailPage = () => {
       <SelectorInput
         optionValue={Object.keys(DataSetType)}
         onChange={handlerChange}
-        name="integration"
+        name="dataset_type"
       />
       <Input
         customClass="business-input"
         labelText="Data Set Name"
         onChange={handlerChange}
-        name="input"
+        name="dataset_name"
       />
       <TextAreaInput
         labelText="Data Set Description"
         onChange={handlerChange}
-        name="description"
+        name="dataset_description"
       />
 
-      {inputValue.integration &&
-        toggleForms(DataSetType[inputValue.integration])}
+      {inputValue.dataset_type &&
+        toggleForms(DataSetType[inputValue.dataset_type])}
 
       <ButtonContainer>
         <Button

@@ -130,6 +130,7 @@ def list_intergations():
 @app.route('/save_dataset', methods=['GET', 'POST'])
 def save_dataset():
     db_details=json.loads(request.data)
+    print(db_details["dataset_type"])
     status=dataset_management.save_dataset(db_details)
     return status
 

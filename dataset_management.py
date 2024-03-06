@@ -22,8 +22,9 @@ def save_dataset(db_details):
         datasets = json.load(json_file)
 
     length = len(datasets["datasets"])
-    if db_details["database_type"] == "Azure SQL":
+    if db_details["dataset_type"] == "Azure SQL":
         details = {"id": length + 1,
+                   "dataset_type": db_details["dataset_type"],
                    "dataset_name": db_details["dataset_name"],
                    "dataset_description": db_details["dataset_description"],
                    "server_name": db_details["server_name"],
@@ -32,8 +33,9 @@ def save_dataset(db_details):
                    "password": db_details["password"]
                    }
         datasets["datasets"].append(details)
-    elif db_details["database_type"] == "Azure Blob":
+    elif db_details["dataset_type"] == "Azure Blob":
         details = {"id": length + 1,
+                   "dataset_type": db_details["dataset_type"],
                    "dataset_name": db_details["dataset_name"],
                    "dataset_description": db_details["dataset_description"],
                    "storageAccountName": db_details["storageAccountName"],
