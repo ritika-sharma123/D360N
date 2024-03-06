@@ -26,10 +26,8 @@ const App = () => {
       const response = await fetch("/login");
       const res_json = await response.json();
       console.log(res_json.status);
-      //setIsLoggedIn(true);
       if (res_json.status === "Succesfully Logged in") {
-      setIsLoggedIn(true);
-      //dispatch(increment());
+        setIsLoggedIn(true);
       }
     }
   };
