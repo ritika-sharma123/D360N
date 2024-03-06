@@ -10,6 +10,7 @@ import TextAreaInput from "../../../components/TextArea";
 import SelectorInput from "../../../components/Selector";
 import BreadCrumbs from "../../../components/BreadCrumbs";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const CreateIntegrationDiv = styled.div`
   width: calc(100% - 300px);
   display: flex;
@@ -46,7 +47,7 @@ const ButtonContainer = styled.div`
   margin-top: 10px;
 `;
 const CreateIntegration = () => {
-  const [InputValue, setInputValue] = useState({
+  const [formData, setFormData] = useState({
     integration: "",
     description: "",
     method: "",
@@ -73,11 +74,20 @@ const CreateIntegration = () => {
   const goToBack = () => navigate("/allintegration");
   const HandlerChange = (e) => {
     const { name, value } = e.target;
-    setInputValue((previous) => ({ ...previous, [name]: value }));
+    setFormData({ ...formData, [name]: value });
   };
-  const formHandler = () => {
-    console.log("data", JSON.stringify(InputValue));
+  const formHandler = async () => {
+    try {
+      const response = await axios.post(
+        "https://jsonplaceholder.typicode.com/posts",
+        JSON.stringify(formData)
+      );
+      console.log("Post created:", response.data);
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
   };
+
   return (
     <CreateIntegrationDiv className="home">
       <Navigation></Navigation>
