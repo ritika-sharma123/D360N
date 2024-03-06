@@ -7,6 +7,8 @@ from datetime import datetime
 from datetime import timedelta
 import json
 from D360N import az_methods
+from D360N import dataset_management
+from D360N import integration_management
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
@@ -116,16 +118,27 @@ def progress(run_id):
 
 @app.route('/list_datasets', methods=['GET', 'POST'])
 def list_datasets():
-    with open('datasets.json', 'r') as json_file:
-        datasets = json.load(json_file)
-        list_of_datasets={"datasets":[]}
-        for i in datasets["datasets"]:
-            print(i)
-            list_of_datasets["datasets"].append({"id":i["id"],
-                                    "dataset_name":i["dataset_name"],
-                                 "dataset_description":i["dataset_description"]})
+    list_of_datasets=dataset_management.list_datasets()
+    return list_of_datasets
 
-    return list_of_datasets["datasets"]
+@app.route('/list_intergations', methods=['GET', 'POST'])
+def list_intergations():
+    list_of_integrations=integration_management.list_intergations()
+    return list_of_integrations
+
+
+@app.route('/save_dataset', methods=['GET', 'POST'])
+def save_dataset():
+    db_details=json.loads(request.data)
+    status=dataset_management.save_dataset(db_details)
+    return status
+
+
+@app.route('/save_intergation', methods=['GET', 'POST'])
+def save_intergation():
+    integration_details=json.loads(request.data)
+    status=integration_management.save_integration(integration_details)
+    return status
 
 
 if __name__ == "__main__":

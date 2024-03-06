@@ -55,18 +55,7 @@ const sampleColumnData = [
 
 const DatasetsPage = () => {
   const navigate = useNavigate();
-  const [rowData, setRowData] = useState([
-    {
-      dataset_description: "Azure SQL Database for Testing",
-      dataset_name: "az_sql",
-      id: 1,
-    },
-    {
-      dataset_description: "Azure Blob for Testing",
-      dataset_name: "az_blob",
-      id: 2,
-    },
-  ]);
+  const [rowData, setRowData] = useState([]);
 
   const createColumnsData = () => {
     let columnData = [];
@@ -107,9 +96,9 @@ const DatasetsPage = () => {
 
   const getDatasets = async () => {
     try {
-      const response = await axios.get("https://dummyjson.com/products/1");
+      const response = await axios.get("/list_datasets");
       console.log("response", response);
-      //   setRowData();
+      setRowData(response.data);
     } catch (err) {
       console.log(err);
     }
