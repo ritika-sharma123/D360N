@@ -21,13 +21,10 @@ const SlectorContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const SelectorInput = ({ optionValue, getSelectedValue }) => {
-  const handleChange = (event) => {
-    getSelectedValue(event);
-  };
+const SelectorInput = ({ optionValue, getSelectedValue, onChange, name }) => {
   return (
     <SlectorContainer>
-      <SelectIntegration onChange={handleChange} isClearable={false}>
+      <SelectIntegration onChange={onChange} name={name} isClearable={false}>
         {optionValue.map((option, index) => {
           return <option key={index}>{option}</option>;
         })}
