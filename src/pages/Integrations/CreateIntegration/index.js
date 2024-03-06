@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import UploadFiles from "../../../components/UploadFiles";
 import Input from "../../../components/Input";
@@ -53,13 +53,12 @@ const CreateIntegration = () => {
     method: "",
     sourcetype: "",
     targettype: "",
-    databasename: "",
-    severname: "",
-    username: "",
   });
   const [file, setFile] = useState();
   const [fileExtension, setFileExtension] = useState();
-  const integration = ["SCDI", "SCDII","CDC"];
+  const [source, setSource] = useState([]);
+  const [target, setTarget] = useState([]);
+  const integration = ["SCDI", "SCDII", "CDC"];
   const breadData = [
     { path: "allintegration", text: "All Integration " },
     { path: "createintegration", text: "Creat New  " },
@@ -76,17 +75,37 @@ const CreateIntegration = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const formHandler = async () => {
     try {
       const response = await axios.post(
         "https://jsonplaceholder.typicode.com/posts",
-        JSON.stringify(formData)
+        formData
       );
       console.log("Post created:", response.data);
     } catch (error) {
       console.error("Error creating post:", error);
     }
   };
+
+  const getDatasets = async () => {
+    try {
+      const response = await axios.get("");
+      console.log("datasets dropdoen", response);
+    } catch (err) {
+      console.log(err);
+    }
+
+    // const arr = response?.data?.map((item, index) => {
+    //   return item.dataset_name;
+    // });
+
+    // console.log("arr", arr);
+  };
+
+  useEffect(() => {
+    getDatasets();
+  }, []);
 
   return (
     <CreateIntegrationDiv className="home">
@@ -100,39 +119,39 @@ const CreateIntegration = () => {
         customClass="integration-input"
         labelText="Integration Name"
         onChange={HandlerChange}
-        name="integration"
+        name="integration_name"
       />
       <TextAreaInput
         getTextAreaValue={getTextAreaValue}
         labelText="Integration Description"
         onChange={HandlerChange}
-        name="description"
+        name="integration_description"
       />
       <Label labelText="Select Integration Method" />
       <SelectorInput
         optionValue={integration}
         getSelectedValue={getSelectedValue}
         onChange={HandlerChange}
-        name="method"
+        name="integration_method"
       />
       <Label labelText="Select Source" />
       <SelectorInput
-        optionValue={integration}
+        optionValue={source}
         getSelectedValue={getSelectedValue}
         onChange={HandlerChange}
-        name="sourcetype"
+        name="source_dataset"
       />
       <Label labelText="Select Target" />
       <SelectorInput
-        optionValue={integration}
+        optionValue={target}
         getSelectedValue={getSelectedValue}
         onChange={HandlerChange}
-        name="targettype"
+        name="target_dataset"
       />
       <ButtonContainer>
         <Button
           name="Save"
-          backgroundcolor="#357eff"
+          backgroundcolor="var(--button-background-color)"
           color="#fff"
           onClick={formHandler}
         />
