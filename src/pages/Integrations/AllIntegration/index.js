@@ -77,7 +77,6 @@ const AllIntegration = () => {
   const getIntegrations = async () => {
     try {
       const response = await axios.get("/list_integrations");
-      console.log("response", response);
       setRowData(response.data);
     } catch (err) {
       console.log(err);

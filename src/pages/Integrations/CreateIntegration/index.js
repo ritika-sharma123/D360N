@@ -48,7 +48,7 @@ const ButtonContainer = styled.div`
 `;
 const CreateIntegration = () => {
   const [formData, setFormData] = useState({
-     integration_name: "",
+    integration_name: "",
     integration_description: "",
     integration_method: "",
     source_dataset: "",
@@ -78,10 +78,7 @@ const CreateIntegration = () => {
 
   const formHandler = async () => {
     try {
-      const response = await axios.post(
-        "/save_integration",
-        formData
-      );
+      const response = await axios.post("/save_integration", formData);
     } catch (error) {
       console.error("Error creating post:", error);
     }
@@ -90,16 +87,16 @@ const CreateIntegration = () => {
   const getDatasets = async () => {
     try {
       const response = await axios.get("/list_datasets");
-       const arr = response?.data?.map((item, index) => {
-       return item.dataset_name;
-     });
-     setSource(arr)
-     setTarget(arr)
+      const arr = response?.data?.map((item, index) => {
+        return item.dataset_name;
+      });
+      setSource(arr);
+      setTarget(arr);
     } catch (err) {
       console.log(err);
     }
   };
-console.log("formData",formData)
+  console.log("formData", formData);
   useEffect(() => {
     getDatasets();
   }, []);
@@ -148,7 +145,7 @@ console.log("formData",formData)
       <ButtonContainer>
         <Button
           name="Save"
-          backgroundcolor="var(--button-background-color)"
+          backgroundColor="var(--button-background-color)"
           color="#fff"
           onClick={formHandler}
         />

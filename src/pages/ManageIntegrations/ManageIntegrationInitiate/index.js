@@ -1,13 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 import DataTable from "../../../components/DataTable";
-import { sampleColumnData1, sampleRowData1 } from "../../../mocks/SampleData";
 import ArrowLeft from "../../../images/ArrowLeft.png";
 import styled from "styled-components";
 import BreadCrumbs from "../../../components/BreadCrumbs";
 import Button from "../../../components/Button";
 import ProgressBar from "../../../components/ProgressBar";
 import ColorBox from "../../../components/ColorBox";
+import axios from "axios";
+
+const sampleColumnData = [
+  {
+    field: "integration_name",
+    headerName: "Integration Name",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+  },
+  {
+    field: "integration_description",
+    headerName: "Integration Description",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+    editable: true,
+  },
+  {
+    field: "source_info",
+    headerName: "Source Information",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+    editable: true,
+  },
+  {
+    field: "target_info",
+    headerName: "Target Information",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+    editable: true,
+  },
+];
+
 const ManageIntegration = styled.div`
   display: flex;
   padding: 20px;
@@ -72,15 +107,14 @@ const ManageIntegrationInitiate = () => {
   const { id } = useParams();
   const [isDisabled, setIsDisabled] = useState(false);
   const [data, setData] = useState({});
+  const [rowData, setRowData] = useState([]);
 
   const pollStatus = async (run_id) => {
     const pp_progress = await fetch(`/execution_status/${run_id}`);
     const pp_progress_json = await pp_progress.json();
-    console.log("Data:", pp_progress_json);
     setData({ ...pp_progress_json, scale: 100 });
     return pp_progress_json;
   };
-  console.log("data:::", data);
   const handleProgress = async () => {
     setIsDisabled(true);
     const response = await fetch("/execute_pipeline/InitialLoad");
@@ -105,6 +139,20 @@ const ManageIntegrationInitiate = () => {
     { path: "all-manage-integrations/:id", text: "Manage Integrations" },
   ];
 
+  useEffect(() => {
+    const fetchDataApi = async () => {
+      try {
+        const response = await axios.get("");
+        console.log(response.data);
+        // setRowData(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchDataApi();
+  }, [rowDetail]);
+
   return (
     <ManageIntegration className="home">
       <Navigation></Navigation>
@@ -120,7 +168,7 @@ const ManageIntegrationInitiate = () => {
         <h1>{rowDetail.integration_name}</h1>
       </Headingcontainer>
       <br></br>
-      <DataTable rows={sampleRowData1} columns={sampleColumnData1} />
+      <DataTable rows={rowData || []} columns={sampleColumnData} />
       <ProcessDiv>
         <div
           style={{

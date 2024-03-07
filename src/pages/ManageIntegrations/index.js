@@ -1,8 +1,42 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../components/DataTable";
-import { sampleRowData, sampleColumnData } from "../../mocks/SampleData";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
+
+const sampleColumnData = [
+  {
+    field: "integration_name",
+    headerName: "Integration Name",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+  },
+  {
+    field: "integration_description",
+    headerName: "Integration Description",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+    editable: true,
+  },
+  {
+    field: "integration_method",
+    headerName: "Integration Method",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+    editable: true,
+  },
+  {
+    field: "action",
+    headerName: "Action",
+    headerAlign: "center",
+    align: "center",
+    flex: 1,
+    editable: true,
+  },
+];
 
 const ActionLinks = styled.div`
   display: flex;
@@ -45,8 +79,14 @@ const ManageIntegrationsPage = () => {
   };
 
   const [columnData, setColumnData] = useState(createColumnsData());
-
-  const handleRowClick = (row) => {};
+  const [rowData, setRowData] = useState([
+    {
+      id: 1,
+      integration_name: "abcd",
+      integration_description: "abcd",
+      integration_method: "SCDII",
+    },
+  ]);
 
   useEffect(() => {
     setColumnData(createColumnsData());
@@ -59,15 +99,24 @@ const ManageIntegrationsPage = () => {
     });
   };
 
+  const getManageIntegrations = async () => {
+    try {
+      const response = await axios.get("");
+      setRowData(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getManageIntegrations();
+  }, []);
+
   return (
     <ManageIntegrationDiv className="home">
       <h2>Manage Integrations</h2>
       <br></br>
-      <DataTable
-        columns={columnData}
-        rows={sampleRowData}
-        handleRowClick={(row) => handleRowClick(row)}
-      />
+      <DataTable columns={columnData} rows={rowData || []} />
     </ManageIntegrationDiv>
   );
 };
