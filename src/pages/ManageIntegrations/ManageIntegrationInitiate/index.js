@@ -107,7 +107,18 @@ const ManageIntegrationInitiate = () => {
   const { id } = useParams();
   const [isDisabled, setIsDisabled] = useState(false);
   const [data, setData] = useState({});
-  const [rowData, setRowData] = useState([]);
+  const [loadState, setLoadState] = useState("InitialLoad");
+  const [rowData, setRowData] = useState([
+    {
+      id: 1,
+      integration_description:
+        "A pipeline implementing SCDII on Azure SQL DB data complied on business file (businessfile.json) associated to the integration",
+      integration_name: "SCDII_AZSQL_to_ADLS_Gen 2",
+      source_dataset: "az_sql",
+      status_initial_load: "Not Done",
+      target_dataset: "az_blob",
+    },
+  ]);
 
   const pollStatus = async (run_id) => {
     const pp_progress = await fetch(`/execution_status/${run_id}`);
@@ -115,9 +126,13 @@ const ManageIntegrationInitiate = () => {
     setData({ ...pp_progress_json, scale: 100 });
     return pp_progress_json;
   };
-  const handleProgress = async () => {
-    setIsDisabled(true);
-    const response = await fetch("/execute_pipeline/InitialLoad");
+  const handleProgress = async (key) => {
+    // setIsDisabled(true)
+    const data = {
+      trigger_name: key,
+      integration_name: rowDetail.integration_name,
+    };
+    const response = await axios.post("/execute_pipeline/", data);
     const res_json = await response.json();
     const run_id = res_json.run_id;
     pollStatus(run_id);
@@ -169,65 +184,86 @@ const ManageIntegrationInitiate = () => {
       </Headingcontainer>
       <br></br>
       <DataTable rows={rowData || []} columns={sampleColumnData} />
-      {rowDetail.integration_method !== "SCDII" ? (
-        <ProcessDiv>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 20,
-              width: "85%",
-            }}
-          >
-            <ProgressBarContainer>
-              <ProgressBar
-                scale={data?.scale}
-                width="100px"
-                status={data?.raw_status}
-                Text={data?.silver_status ? "Bronze Layer  " : ""}
-              />
-              <ProgressBar
-                scale={data?.scale}
-                width="100px"
-                status={data?.silver_status}
-                Text={data?.silver_status ? "Silver Layer  " : ""}
-              />
-              <ProgressBar
-                scale={data?.scale}
-                width="100px"
-                status={data?.gold_status}
-                Text={data?.silver_status ? "Gold Layer " : ""}
-              />
-            </ProgressBarContainer>
+      {rowDetail.integration_method === "SCDII" ? (
+        rowData[0].status_initial_load === "Not Done" ? (
+          <ProcessDiv>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 20,
+                width: "85%",
+              }}
+            >
+              <ProgressBarContainer>
+                <ProgressBar
+                  scale={data?.scale}
+                  width="100px"
+                  status={data?.raw_status}
+                  Text={data?.silver_status ? "Bronze Layer  " : ""}
+                />
+                <ProgressBar
+                  scale={data?.scale}
+                  width="100px"
+                  status={data?.silver_status}
+                  Text={data?.silver_status ? "Silver Layer  " : ""}
+                />
+                <ProgressBar
+                  scale={data?.scale}
+                  width="100px"
+                  status={data?.gold_status}
+                  Text={data?.silver_status ? "Gold Layer " : ""}
+                />
+              </ProgressBarContainer>
 
-            <Button
-              name="Start Initial Load"
-              onClick={handleProgress}
-              isDisabled={isDisabled}
-              backgroundColor={`var(--button-background-color)`}
-            />
-          </div>
-          <div>
-            <ColorBoxContainer>
-              <BlankDiv></BlankDiv>
-              <BoxContainer>
-                <div>
-                  <ColorBox Color="#1890FF" Text="Queued"></ColorBox>
-                </div>
-                <div>
-                  <ColorBox Color="#FFFF00" Text="InProgress"></ColorBox>
-                </div>
-                <div>
-                  <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
-                </div>
-                <div>
-                  <ColorBox Color="red" Text="Cancelled"></ColorBox>
-                </div>
-              </BoxContainer>
-            </ColorBoxContainer>
-          </div>
-        </ProcessDiv>
+              <Button
+                name="Start Initial Load"
+                onClick={() => handleProgress("InitialLoad")}
+                isDisabled={isDisabled}
+                backgroundColor={`var(--button-background-color)`}
+              />
+            </div>
+            <div>
+              <ColorBoxContainer>
+                <BlankDiv></BlankDiv>
+                <BoxContainer>
+                  <div>
+                    <ColorBox Color="#1890FF" Text="Queued"></ColorBox>
+                  </div>
+                  <div>
+                    <ColorBox Color="#FFFF00" Text="InProgress"></ColorBox>
+                  </div>
+                  <div>
+                    <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
+                  </div>
+                  <div>
+                    <ColorBox Color="red" Text="Cancelled"></ColorBox>
+                  </div>
+                </BoxContainer>
+              </ColorBoxContainer>
+            </div>
+          </ProcessDiv>
+        ) : (
+          <ProcessDiv>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 20,
+                width: "85%",
+              }}
+            >
+              <Button
+                name="Start Incremental Load"
+                onClick={() => handleProgress("IncrementalLoad")}
+                isDisabled={isDisabled}
+                backgroundColor={`var(--button-background-color)`}
+              />
+            </div>
+          </ProcessDiv>
+        )
       ) : (
         <ProcessDiv />
       )}
