@@ -8,6 +8,7 @@ import Button from "../../../components/Button";
 import ProgressBar from "../../../components/ProgressBar";
 import ColorBox from "../../../components/ColorBox";
 import axios from "axios";
+import fileTransfer from "../../../images/fileTransfer.gif";
 
 const sampleColumnData = [
   {
@@ -265,7 +266,9 @@ const ManageIntegrationInitiate = () => {
           </ProcessDiv>
         )
       ) : (
-        <ProcessDiv />
+        <ProcessDiv>
+          <img src={fileTransfer} alt="gif" height="100" width="300" />
+        </ProcessDiv>
       )}
     </ManageIntegration>
   );
