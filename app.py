@@ -37,7 +37,7 @@ def trigger_pipeline(pipeline_name, parameters):
     return run_id
 
 
-parameters = {
+"""parameters = {
             "server_name": "asddatalake.database.windows.net",
             "database_name": "DLXpressAZSQL",
             "mnt_point": "dbfs:/mnt/new_mount/",
@@ -45,11 +45,31 @@ parameters = {
             "integration_name":"Test_integration",
             "password":"etl@1234abcd#",
             "business_file_name":"businessfile"
-        }
+        }"""
 
-@app.route('/execute_pipeline/<pipeline_name>', methods=['GET', 'POST'])
-def pipeline_execution(pipeline_name):
-    run_id = trigger_pipeline(pipeline_name, parameters)
+@app.route('/execute_pipeline', methods=['GET', 'POST'])
+def pipeline_execution():
+    parameters={}
+    trigger_name = json.loads(request.data)["data"]["trigger_name"]
+    integration_name=json.loads(request.data)["data"]["integration_name"]
+    with open('integrations.json', 'r') as json_file:
+        integrations = json.load(json_file)
+    with open('datasets.json', 'r') as json_file:
+        datasets = json.load(json_file)
+    for i in integrations["integrations"]:
+        if i["integration_name"]==integration_name:
+            for j in datasets["datasets"]:
+                if j["dataset_name"]==i["source_dataset"]:
+                    parameters = {
+                        "server_name": j["server_name"],
+                        "database_name": j["database_name"],
+                        "mnt_point": "dbfs:/mnt/new_mount/",
+                        "user_id": j["user_id"],
+                        "integration_name": "Test_integration",
+                        "password": j["password"],
+                        "business_file_name": "businessfile1"
+                    }
+    run_id = trigger_pipeline(trigger_name, parameters)
     return {"run_id":run_id}
 
 
