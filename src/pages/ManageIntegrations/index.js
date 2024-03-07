@@ -79,7 +79,15 @@ const ManageIntegrationsPage = () => {
   };
 
   const [columnData, setColumnData] = useState(createColumnsData());
-  const [rowData, setRowData] = useState([ ]);
+  const [rowData, setRowData] = useState([
+    {
+      id: 1,
+      integration_description:
+        "A pipeline implementing SCDII on Azure SQL DB data complied on business file (businessfile.json) associated to the integration",
+      integration_method: "SCDII",
+      integration_name: "SCDII_AZSQL_to_ADLS_Gen 2",
+    },
+  ]);
 
   useEffect(() => {
     setColumnData(createColumnsData());
@@ -109,7 +117,7 @@ const ManageIntegrationsPage = () => {
     <ManageIntegrationDiv className="home">
       <h2>Manage Integrations</h2>
       <br></br>
-      <DataTable columns={columnData} rows={rowData || []} />
+      <DataTable columns={columnData} rows={rowData} />
     </ManageIntegrationDiv>
   );
 };

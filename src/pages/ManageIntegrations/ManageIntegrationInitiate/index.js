@@ -141,7 +141,7 @@ const ManageIntegrationInitiate = () => {
 
   useEffect(() => {
     const fetchDataApi = async () => {
-     const data = rowDetail.integration_name;
+      const data = rowDetail.integration_name;
       try {
         const response = await axios.post("/manage_integration_info", { data });
         setRowData(response.data);
@@ -169,64 +169,68 @@ const ManageIntegrationInitiate = () => {
       </Headingcontainer>
       <br></br>
       <DataTable rows={rowData || []} columns={sampleColumnData} />
-      <ProcessDiv>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 20,
-            width: "85%",
-          }}
-        >
-          <ProgressBarContainer>
-            <ProgressBar
-              scale={data?.scale}
-              width="100px"
-              status={data?.raw_status}
-              Text={data?.silver_status ? "Bronze Layer  " : ""}
-            />
-            <ProgressBar
-              scale={data?.scale}
-              width="100px"
-              status={data?.silver_status}
-              Text={data?.silver_status ? "Silver Layer  " : ""}
-            />
-            <ProgressBar
-              scale={data?.scale}
-              width="100px"
-              status={data?.gold_status}
-              Text={data?.silver_status ? "Gold Layer " : ""}
-            />
-          </ProgressBarContainer>
+      {rowDetail.integration_method !== "SCDII" ? (
+        <ProcessDiv>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 20,
+              width: "85%",
+            }}
+          >
+            <ProgressBarContainer>
+              <ProgressBar
+                scale={data?.scale}
+                width="100px"
+                status={data?.raw_status}
+                Text={data?.silver_status ? "Bronze Layer  " : ""}
+              />
+              <ProgressBar
+                scale={data?.scale}
+                width="100px"
+                status={data?.silver_status}
+                Text={data?.silver_status ? "Silver Layer  " : ""}
+              />
+              <ProgressBar
+                scale={data?.scale}
+                width="100px"
+                status={data?.gold_status}
+                Text={data?.silver_status ? "Gold Layer " : ""}
+              />
+            </ProgressBarContainer>
 
-          <Button
-            name="Start Initial Load"
-            onClick={handleProgress}
-            isDisabled={isDisabled}
-            backgroundColor={`var(--button-background-color)`}
-          />
-        </div>
-        <div>
-          <ColorBoxContainer>
-            <BlankDiv></BlankDiv>
-            <BoxContainer>
-              <div>
-                <ColorBox Color="#1890FF" Text="Queued"></ColorBox>
-              </div>
-              <div>
-                <ColorBox Color="#FFFF00" Text="InProgress"></ColorBox>
-              </div>
-              <div>
-                <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
-              </div>
-              <div>
-                <ColorBox Color="red" Text="Cancelled"></ColorBox>
-              </div>
-            </BoxContainer>
-          </ColorBoxContainer>
-        </div>
-      </ProcessDiv>
+            <Button
+              name="Start Initial Load"
+              onClick={handleProgress}
+              isDisabled={isDisabled}
+              backgroundColor={`var(--button-background-color)`}
+            />
+          </div>
+          <div>
+            <ColorBoxContainer>
+              <BlankDiv></BlankDiv>
+              <BoxContainer>
+                <div>
+                  <ColorBox Color="#1890FF" Text="Queued"></ColorBox>
+                </div>
+                <div>
+                  <ColorBox Color="#FFFF00" Text="InProgress"></ColorBox>
+                </div>
+                <div>
+                  <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
+                </div>
+                <div>
+                  <ColorBox Color="red" Text="Cancelled"></ColorBox>
+                </div>
+              </BoxContainer>
+            </ColorBoxContainer>
+          </div>
+        </ProcessDiv>
+      ) : (
+        <ProcessDiv />
+      )}
     </ManageIntegration>
   );
 };
