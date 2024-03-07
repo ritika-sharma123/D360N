@@ -121,10 +121,24 @@ def list_datasets():
     list_of_datasets=dataset_management.list_datasets()
     return list_of_datasets
 
+
 @app.route('/list_integrations', methods=['GET', 'POST'])
 def list_integrations():
-    list_of_integrations=integration_management.list_intergations()
+    list_of_integrations=integration_management.list_integrations()
     return list_of_integrations
+
+
+@app.route('/manage_list_integrations', methods=['GET', 'POST'])
+def manage_list_integrations():
+    list_of_integrations=integration_management.manage_list_integrations()
+    return list_of_integrations
+
+
+@app.route('/manage_integration_info', methods=['GET', 'POST'])
+def manage_integration_info():
+    integration_name=json.loads(request.data)
+    integration_info=integration_management.manage_integration_info(integration_name)
+    return integration_info
 
 
 @app.route('/save_dataset', methods=['GET', 'POST'])
