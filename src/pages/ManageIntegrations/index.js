@@ -79,14 +79,7 @@ const ManageIntegrationsPage = () => {
   };
 
   const [columnData, setColumnData] = useState(createColumnsData());
-  const [rowData, setRowData] = useState([
-    {
-      id: 1,
-      integration_name: "abcd",
-      integration_description: "abcd",
-      integration_method: "SCDII",
-    },
-  ]);
+  const [rowData, setRowData] = useState([ ]);
 
   useEffect(() => {
     setColumnData(createColumnsData());
@@ -101,7 +94,7 @@ const ManageIntegrationsPage = () => {
 
   const getManageIntegrations = async () => {
     try {
-      const response = await axios.get("");
+      const response = await axios.get("/manage_list_integrations");
       setRowData(response.data);
     } catch (err) {
       console.log(err);

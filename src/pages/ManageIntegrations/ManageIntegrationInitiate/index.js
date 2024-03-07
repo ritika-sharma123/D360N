@@ -141,10 +141,10 @@ const ManageIntegrationInitiate = () => {
 
   useEffect(() => {
     const fetchDataApi = async () => {
+     const data = rowDetail.integration_name;
       try {
-        const response = await axios.get("");
-        console.log(response.data);
-        // setRowData(response.data);
+        const response = await axios.post("/manage_integration_info", { data });
+        setRowData(response.data);
       } catch (err) {
         console.log(err);
       }

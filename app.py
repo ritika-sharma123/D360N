@@ -136,7 +136,8 @@ def manage_list_integrations():
 
 @app.route('/manage_integration_info', methods=['GET', 'POST'])
 def manage_integration_info():
-    integration_name=json.loads(request.data)
+
+    integration_name=json.loads(request.data)["data"]
     integration_info=integration_management.manage_integration_info(integration_name)
     return integration_info
 
