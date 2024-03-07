@@ -23,12 +23,12 @@ const App = () => {
   const handelLogin = async (username, passWord) => {
     console.log("hello");
     if (username === "admin" && passWord === "password") {
-    const response = await fetch("/login");
-    const res_json = await response.json();
-    //   console.log(res_json.status);
-    if (res_json.status === "Succesfully Logged in") {
-    setIsLoggedIn(true);
-    }
+      // const response = await fetch("/login");
+      // const res_json = await response.json();
+      // //   console.log(res_json.status);
+      // if (res_json.status === "Succesfully Logged in") {
+      setIsLoggedIn(true);
+      // }
     }
   };
 

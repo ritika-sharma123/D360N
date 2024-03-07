@@ -33,7 +33,6 @@ const Navigation = styled.div`
 `;
 
 const ProcessDiv = styled.div`
-  border: 1px solid var(--grey);
   margin-top: 10px;
   padding: 10px;
   display: flex;
@@ -63,6 +62,32 @@ const BoxContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const TabsContainer = styled.div`
+  display: flex;
+  gap: 0px;
+  .tab-button {
+    background-color: var(--button-background-color);
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+    border: 1px solid var(--grey);
+  }
+`;
+const IncrementalLoadContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  height: 120px;
+  width: 100%;
+
+  box-sizing: border-box;
+  padding: 10px;
+`;
+const TabsWraper = styled.div`
+  border: 1px solid var(--grey);
+  padding: 10px;
+  margin-top: 20px;
+`;
 const ManageIntegrationInitiate = () => {
   //const { pathname } = useLocation();
   const {
@@ -71,6 +96,7 @@ const ManageIntegrationInitiate = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isShowProgress, setShowProgress] = useState(true);
   const [data, setData] = useState({});
 
   const pollStatus = async (run_id) => {
@@ -104,7 +130,13 @@ const ManageIntegrationInitiate = () => {
     { path: "all-manage-integrations", text: "All Integrations" },
     { path: "all-manage-integrations/:id", text: "Manage Integrations" },
   ];
-
+  const handleTabOne = () => {
+    setShowProgress(true);
+  };
+  const handleTabTwo = () => {
+    setShowProgress(false);
+  };
+  const handleIncrementalLoad = () => {};
   return (
     <ManageIntegration className="home">
       <Navigation></Navigation>
@@ -121,64 +153,84 @@ const ManageIntegrationInitiate = () => {
       </Headingcontainer>
       <br></br>
       <DataTable rows={sampleRowData1} columns={sampleColumnData1} />
-      <ProcessDiv>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 20,
-            width: "85%",
-          }}
-        >
-          <ProgressBarContainer>
-            <ProgressBar
-              scale={data?.scale}
-              width="100px"
-              status={data?.raw_status}
-              Text={data?.silver_status ? "Bronze Layer  " : ""}
-            />
-            <ProgressBar
-              scale={data?.scale}
-              width="100px"
-              status={data?.silver_status}
-              Text={data?.silver_status ? "Silver Layer  " : ""}
-            />
-            <ProgressBar
-              scale={data?.scale}
-              width="100px"
-              status={data?.gold_status}
-              Text={data?.silver_status ? "Gold Layer " : ""}
-            />
-          </ProgressBarContainer>
+      <TabsWraper>
+        <TabsContainer>
+          <div className="tab-button" onClick={handleTabOne}>
+            Tab1
+          </div>
+          <div className="tab-button" onClick={handleTabTwo}>
+            Tab2
+          </div>
+        </TabsContainer>
+        {isShowProgress ? (
+          <ProcessDiv>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 20,
+                width: "85%",
+              }}
+            >
+              <ProgressBarContainer>
+                <ProgressBar
+                  scale={data?.scale}
+                  width="100px"
+                  status={data?.raw_status}
+                  Text={data?.silver_status ? "Bronze Layer  " : ""}
+                />
+                <ProgressBar
+                  scale={data?.scale}
+                  width="100px"
+                  status={data?.silver_status}
+                  Text={data?.silver_status ? "Silver Layer  " : ""}
+                />
+                <ProgressBar
+                  scale={data?.scale}
+                  width="100px"
+                  status={data?.gold_status}
+                  Text={data?.silver_status ? "Gold Layer " : ""}
+                />
+              </ProgressBarContainer>
 
-          <Button
-            name="Start Initial Load"
-            onClick={handleProgress}
-            isDisabled={isDisabled}
-            backgroundColor={`var(--button-background-color)`}
-          />
-        </div>
-        <div>
-          <ColorBoxContainer>
-            <BlankDiv></BlankDiv>
-            <BoxContainer>
-              <div>
-                <ColorBox Color="#1890FF" Text="Queued"></ColorBox>
-              </div>
-              <div>
-                <ColorBox Color="#FFFF00" Text="InProgress"></ColorBox>
-              </div>
-              <div>
-                <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
-              </div>
-              <div>
-                <ColorBox Color="red" Text="Cancelled"></ColorBox>
-              </div>
-            </BoxContainer>
-          </ColorBoxContainer>
-        </div>
-      </ProcessDiv>
+              <Button
+                name="Start Initial Load"
+                onClick={handleProgress}
+                isDisabled={isDisabled}
+                backgroundColor={`var(--button-background-color)`}
+              />
+            </div>
+            <div>
+              <ColorBoxContainer>
+                <BlankDiv></BlankDiv>
+                <BoxContainer>
+                  <div>
+                    <ColorBox Color="#1890FF" Text="Queued"></ColorBox>
+                  </div>
+                  <div>
+                    <ColorBox Color="#FFFF00" Text="InProgress"></ColorBox>
+                  </div>
+                  <div>
+                    <ColorBox Color="#52C41A" Text="Succeeded"></ColorBox>
+                  </div>
+                  <div>
+                    <ColorBox Color="red" Text="Cancelled"></ColorBox>
+                  </div>
+                </BoxContainer>
+              </ColorBoxContainer>
+            </div>
+          </ProcessDiv>
+        ) : (
+          <IncrementalLoadContainer>
+            <Button
+              name="Incremental Load"
+              onClick={handleIncrementalLoad}
+              backgroundColor={`var(--button-background-color)`}
+            />
+          </IncrementalLoadContainer>
+        )}
+      </TabsWraper>
     </ManageIntegration>
   );
 };
