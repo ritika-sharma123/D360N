@@ -26,7 +26,7 @@ const sampleColumnData = [
     editable: true,
   },
   {
-    field: "source_info",
+    field: "source_dataset",
     headerName: "Source Information",
     flex: 1,
     headerAlign: "center",
@@ -34,7 +34,7 @@ const sampleColumnData = [
     editable: true,
   },
   {
-    field: "target_info",
+    field: "target_dataset",
     headerName: "Target Information",
     flex: 1,
     headerAlign: "center",
