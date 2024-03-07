@@ -18,7 +18,6 @@ const BreadCrumbs = ({ breadData }) => {
   const CurrentPath = useLocation();
   let breadcrumpath = "";
   let nam = CurrentPath.pathname.split("/").filter((x) => x !== "");
-  console.log("path:", nam);
   return (
     <BreadCrumbsDiv>
       {breadData?.map((name) => {

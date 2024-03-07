@@ -109,17 +109,7 @@ const ManageIntegrationInitiate = () => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [data, setData] = useState({});
   const [loadState, setLoadState] = useState("InitialLoad");
-  const [rowData, setRowData] = useState([
-    {
-      id: 1,
-      integration_description:
-        "A pipeline implementing SCDII on Azure SQL DB data complied on business file (businessfile.json) associated to the integration",
-      integration_name: "SCDII_AZSQL_to_ADLS_Gen 2",
-      source_dataset: "az_sql",
-      status_initial_load: "Not Done",
-      target_dataset: "az_blob",
-    },
-  ]);
+  const [rowData, setRowData] = useState([]);
 
   const pollStatus = async (run_id) => {
     const pp_progress = await fetch(`/execution_status/${run_id}`);
@@ -133,8 +123,8 @@ const ManageIntegrationInitiate = () => {
       trigger_name: key,
       integration_name: rowDetail.integration_name,
     };
-    const response = await axios.post("/execute_pipeline/", data);
-    const res_json = await response.json();
+    const response = await axios.post("/execute_pipeline", data);
+    const res_json = await response.data;
     const run_id = res_json.run_id;
     pollStatus(run_id);
     const intervalID = setInterval(() => {
@@ -185,8 +175,8 @@ const ManageIntegrationInitiate = () => {
       </Headingcontainer>
       <br></br>
       <DataTable rows={rowData || []} columns={sampleColumnData} />
-      {rowDetail.integration_method === "SCDII" ? (
-        rowData[0].status_initial_load === "Not Done" ? (
+      {rowDetail?.integration_method === "SCDII" ? (
+        rowData[0]?.status_initial_load === "Not Done" ? (
           <ProcessDiv>
             <div
               style={{
