@@ -49,27 +49,34 @@ def trigger_pipeline(pipeline_name, parameters):
 
 @app.route('/execute_pipeline', methods=['GET', 'POST'])
 def pipeline_execution():
+    print(request.data)
     parameters={}
-    trigger_name = json.loads(request.data)["data"]["trigger_name"]
-    integration_name=json.loads(request.data)["data"]["integration_name"]
+    trigger_name = json.loads(request.data)["trigger_name"]
+    integration_name=json.loads(request.data)["integration_name"]
     with open('integrations.json', 'r') as json_file:
         integrations = json.load(json_file)
+    with open('integration_status.json', 'r') as json_file:
+        integration_status = json.load(json_file)
     with open('datasets.json', 'r') as json_file:
         datasets = json.load(json_file)
     for i in integrations["integrations"]:
-        if i["integration_name"]==integration_name:
-            for j in datasets["datasets"]:
-                if j["dataset_name"]==i["source_dataset"]:
-                    parameters = {
-                        "server_name": j["server_name"],
-                        "database_name": j["database_name"],
-                        "mnt_point": "dbfs:/mnt/new_mount/",
-                        "user_id": j["user_id"],
-                        "integration_name": "Test_integration",
-                        "password": j["password"],
-                        "business_file_name": "businessfile1"
-                    }
+        for j in datasets["datasets"]:
+            if j["dataset_name"]==i["source_dataset"]:
+                parameters = {
+                    "server_name": j["server_name"],
+                    "database_name": j["database_name"],
+                    "mnt_point": "dbfs:/mnt/new_mount/",
+                    "user_id": j["user_id"],
+                    "integration_name": "Test_integration",
+                    "password": j["password"],
+                    "business_file_name": "businessfile1"
+                }
     run_id = trigger_pipeline(trigger_name, parameters)
+    """if trigger_name == "InitialLoad":
+        for k in integration_status["integrations"]:
+            if k["integration_name"] == integration_name:
+                k["status_initial_load"] = "Done"""
+
     return {"run_id":run_id}
 
 

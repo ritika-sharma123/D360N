@@ -7,6 +7,14 @@
             "integration_description": "A pipeline implementing SCDII on Azure SQL DB data complied on business file (businessfile.json) associated to the integration",
             "source_dataset": "az_sql",
             "target_dataset": "az_blob"
+        },
+        {
+            "id": 2,
+            "integration_name": "CDC_MySQL_to_PostgresSQL",
+            "integration_method": "CDC",
+            "integration_description": "A pipeline implementing CDC on MySQL DB",
+            "source_dataset": "az_sql",
+            "target_dataset": "az_blob"
         }
     ]
 }
